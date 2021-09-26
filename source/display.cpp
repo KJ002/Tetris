@@ -24,10 +24,7 @@ void Display::attachShape(Object* shape){
 
 void Display::drawShape(){
   for (auto i : shapes)
-    i->draw(
-      this->screenWidth,
-      this->screenHeight
-    );
+    i->draw();
 }
 
 void Display::closeScreen(){
