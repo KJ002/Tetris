@@ -2,8 +2,11 @@
 #include <raylib.h>
 #include <cmath>
 
+#define PI 2*acos(0.0)
 #define power2(x) ((x)*(x))
 
+double radToDeg(double rad) { return rad / (PI / 180); }
+double degToRad(double deg) { return deg * (PI / 180); }
 
 struct Vec2 : public Vector2{
   Vec2(){
@@ -70,8 +73,10 @@ struct Vec2 : public Vector2{
   Vec2 rotate(const double th) const{
     Vec2 result;
 
-    result.x = cos(th) * this->x - sin(th) * this->y;
-    result.y = sin(th) * this->x + sin(th) * this->y;
+    float rad = degToRad(th);
+
+    result.x = std::cos(rad) * this->x - std::sin(rad) * this->y;
+    result.y = std::sin(rad) * this->x + std::cos(rad) * this->y;
 
     return result;
   }
