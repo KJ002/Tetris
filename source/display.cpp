@@ -1,4 +1,3 @@
-#pragma once
 #include "display.hpp"
 #include "object.hpp"
 #include <raylib.h>
