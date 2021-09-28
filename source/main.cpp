@@ -1,8 +1,10 @@
 #include <raylib.h>
 #include <iostream>
-#include "models.hpp"
 #include <cmath>
 #include <vector>
+
+#include "display.hpp"
+#include "object.hpp"
 
 #define LOG(x) std::cout << x << std::endl
 #define screenWidth 800
@@ -21,9 +23,16 @@ int main(){
     screenFPS
   );
 
-  BeginDrawing();
-  ClearBackground(RAYWHITE);
-  EndDrawing();
+  Square x(10, 10, 20, 20);
+
+  screen.attachShape(&x);
+
+  while (!WindowShouldClose()){
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    screen.drawShape();
+    EndDrawing();
+  }
 
   screen.closeScreen();
 
