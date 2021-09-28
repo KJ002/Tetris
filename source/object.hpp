@@ -1,8 +1,11 @@
+#pragma once
+
 struct Object{
   virtual void draw() const = 0;
+  virtual ~Object(){}
 };
 
-struct Square : Object{
+struct Square : public Object{
   int x = 0;
   int y = 0;
   int width = 0;
