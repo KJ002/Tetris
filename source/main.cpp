@@ -1,7 +1,5 @@
 #include <raylib.h>
 #include <iostream>
-#include <cmath>
-#include <vector>
 
 #include "display.hpp"
 #include "object.hpp"
