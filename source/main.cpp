@@ -9,10 +9,8 @@
 #define LOG(x) std::cout << x << std::endl
 #define screenWidth 800
 #define screenHeight 450
-#define screenTitle "[Example] Ray Marching"
+#define screenTitle "Tetris - KJ002"
 #define screenFPS 60
-#define minRadius .0008
-#define depth 20
 
 
 int main(){
