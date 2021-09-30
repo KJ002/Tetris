@@ -18,7 +18,14 @@ struct Square : public Object{
 struct TetrisBlock{
   int x = 0;
   int y = 0;
+  bool shape[25]{
+    0, 0, 0, 1, 0,
+    0, 0, 0, 1, 0,
+    0, 0, 1, 1, 0,
+    0, 0, 0, 1, 0,
+    0, 0, 0, 1, 0
+  };
 
-  TetrisBlock(int x, int y, int shape);
+  TetrisBlock(int x, int y, int shapePrefab);
   void draw() const override;
 };
