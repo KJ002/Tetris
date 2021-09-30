@@ -15,7 +15,7 @@ struct Square : public Object{
   void draw() const override;
 };
 
-struct TetrisBlock{
+struct TetrisBlock : public Object{
   int x = 0;
   int y = 0;
   bool shape[25]{
