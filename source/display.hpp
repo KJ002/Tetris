@@ -13,8 +13,9 @@ private:
 
 public:
 
-  Display(int, int, const char*, int);
+  Display(int width, int height, const char* title, int fps);
   void attachShape(Object*);
   void drawShape();
   void closeScreen();
+
 };
