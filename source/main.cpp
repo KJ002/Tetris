@@ -19,7 +19,7 @@ int main(){
     screenFPS
   );
 
-  Square x(10, 10, 20, 20);
+  TetrisBlock x(100, 10, 0);
 
   screen.attachShape(&x);
 
