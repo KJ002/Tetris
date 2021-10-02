@@ -20,14 +20,19 @@ int main(){
   );
 
   TetrisBlock x(100, 10, 0);
+  TetrisBlock y(100, 70, 0);
 
   screen.attachShape(&x);
+  screen.attachShape(&y);
+
+  y.active = false;
 
   while (!WindowShouldClose()){
     BeginDrawing();
     ClearBackground(RAYWHITE);
     screen.drawShape();
     EndDrawing();
+    x.colliding(&y);
   }
 
   screen.closeScreen();
