@@ -5,8 +5,8 @@
 #define PI 2*acos(0.0)
 #define power2(x) ((x)*(x))
 
-double radToDeg(double rad) { return rad / (PI / 180); }
-double degToRad(double deg) { return deg * (PI / 180); }
+inline double radToDeg(double rad) { return rad / (PI / 180); }
+inline double degToRad(double deg) { return deg * (PI / 180); }
 
 struct Vec2 : public Vector2{
   Vec2(){
