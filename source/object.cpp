@@ -5,6 +5,7 @@
 #include "object.hpp"
 #include "utils.hpp"
 #include "models.hpp"
+#include "vec2.hpp"
 
 #define LOG(x) std::cout << x << std::endl
 
@@ -73,4 +74,27 @@ bool TetrisBlock::colliding(TetrisBlock *other){
   }
 
   return false;
+}
+
+void TetrisBlock::rotateLeft(){
+  for (int i = 0; i < 25; i++){
+    if(meta.map[i]){
+      meta.map[i] = 0;
+
+      Vec2 mapRelative(i%5, (int)i/5);
+
+      Vec2 result = mapRelative.rotate(90, meta.rotationalOrigin);
+
+      result.x = round(result.x);
+      result.y = round(result.y);
+
+      int position = ((int)result.y / 5) + result.x;
+
+      meta.map[position] = 1;
+
+      LOG("x");
+
+      //std::cout << (Vec2){1, 0}.rotate(90).x << " " << (Vec2){1, 0}.rotate(90).y << std::endl;
+    }
+  }
 }
