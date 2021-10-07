@@ -5,7 +5,7 @@
 TetrisMeta::TetrisMeta(int x, int y, int shape){
   origin = (Vec2){(float)x, (float)y};
 
-  if (!shape)
+  if (!shape){
     map = {
       0, 0, 0, 0, 0,
       0, 0, 0, 1, 0,
@@ -13,6 +13,9 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
       0, 0, 0, 1, 0,
       0, 0, 0, 1, 0,
     };
+
+    rotationalOrigin = (Vec2){2.5, 1.5};
+  }
 }
 
 TetrisMeta::TetrisMeta(){
