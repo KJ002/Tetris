@@ -1,4 +1,5 @@
 #pragma once
+#include "models.hpp"
 
 struct Object{
   virtual void draw() const = 0;
@@ -16,19 +17,10 @@ struct Square : public Object{
 };
 
 struct TetrisBlock : public Object{
-  int x = 0;
-  int y = 0;
   bool active = true;
-  bool shape[25]{
-    0, 0, 0, 0, 0,
-    0, 0, 0, 1, 0,
-    0, 0, 0, 1, 0,
-    0, 0, 0, 1, 0,
-    0, 0, 0, 1, 0,
-  };
+  TetrisMeta meta;
 
-
-  TetrisBlock(int x, int y, int shapePrefab);
+  TetrisBlock(int x, int y, int shape);
   bool colliding(TetrisBlock* other);
   void draw() const override;
 };
