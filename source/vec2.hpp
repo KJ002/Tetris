@@ -2,7 +2,6 @@
 #include <raylib.h>
 #include <cmath>
 
-#define PI 2*acos(0.0)
 #define power2(x) ((x)*(x))
 
 inline double radToDeg(double rad) { return rad / (PI / 180); }
