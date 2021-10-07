@@ -3,8 +3,7 @@
 
 
 TetrisMeta::TetrisMeta(int x, int y, int shape){
-  this->x = x;
-  this->y = y;
+  origin = (Vec2){(float)x, (float)y};
 
   if (!shape)
     map = {
@@ -18,4 +17,12 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
 
 TetrisMeta::TetrisMeta(){
   TetrisMeta(0, 0, 0);
+}
+
+int TetrisMeta::getX(){
+  return origin.x;
+}
+
+int TetrisMeta::getY(){
+  return origin.y;
 }
