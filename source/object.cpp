@@ -30,8 +30,8 @@ void TetrisBlock::draw() const{
       int deltaY = (int)i/5;
 
       DrawRectangle(
-        meta.x+(deltaX*10),
-        meta.y+(deltaY*10),
+        meta.getX()+(deltaX*10),
+        meta.getY()+(deltaY*10),
         10,
         10,
         BLUE
@@ -53,15 +53,16 @@ bool TetrisBlock::colliding(TetrisBlock *other){
     if (meta.map[i] &&
         !(safeGet<bool, 25>(i+5, meta.map))){
       for (int i2 = 0; i2 < 25; i2++){
-        if (other->meta.map[i2] && !(safeGet<bool, 25>(i2-5, other->meta.map))){
+        if (other->meta.map[i2] &&
+            !(safeGet<bool, 25>(i2-5, other->meta.map))){
 
           // Check that if 10 (width and height of each block) they overlap
 
-          int thisX = meta.x+((i%5)*10);
-          int thisY = meta.y+(((int)i/5)*10);
+          int thisX = meta.getX()+((i%5)*10);
+          int thisY = meta.getY()+(((int)i/5)*10);
 
-          int otherX = other->meta.x+((i2%5)*10);
-          int otherY = other->meta.y+(((int)i2/5)*10);
+          int otherX = other->meta.getX()+((i2%5)*10);
+          int otherY = other->meta.getY()+(((int)i2/5)*10);
 
           if (thisX == otherX &&
               std::abs(thisY-otherY) == 10)
