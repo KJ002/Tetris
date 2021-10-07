@@ -19,10 +19,18 @@ TetrisMeta::TetrisMeta(){
   TetrisMeta(0, 0, 0);
 }
 
-int TetrisMeta::getX(){
+int TetrisMeta::getX() const{
   return origin.x;
 }
 
-int TetrisMeta::getY(){
+int TetrisMeta::getY() const{
   return origin.y;
+}
+
+void TetrisMeta::setX(const int x){
+  origin.x = (float)x;
+}
+
+void TetrisMeta::setY(const int y){
+  origin.y = (float)y;
 }

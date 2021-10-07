@@ -8,8 +8,11 @@ struct TetrisMeta{
   Vec2 origin;
   Vec2 rotationalOrigin;
 
-  int getY();
-  int getX();
+  int getX() const;
+  int getY() const;
+
+  void setX(const int x);
+  void setY(const int y);
 
   TetrisMeta(int x, int y, int shape);
   TetrisMeta();
