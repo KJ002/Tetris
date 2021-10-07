@@ -61,6 +61,14 @@ struct Vec2 : public Vector2{
     return !operator>(other);
   }
 
+  double sum() const{
+    return x+y;
+  }
+
+  double product() const{
+    return x*y;
+  }
+
   double dotProduct(const Vec2& other) const{
     return x*other.x+y*other.y;
   }
