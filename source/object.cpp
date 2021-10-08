@@ -82,9 +82,8 @@ void TetrisBlock::rotateLeft(){
     if(meta.map[i]){
       meta.map[i] = 0;
 
-      Vec2 mapRelative(i%5, (int)i/5);
+      Vec2 mapRelative(i%5, 4-((int)i/5));
 
-      mapRelative.y--;
 
       Vec2 result = mapRelative.rotate(90, meta.rotationalOrigin);
 
@@ -102,6 +101,8 @@ void TetrisBlock::rotateLeft(){
       else{
         position = result.x;
       }
+
+      LOG(mapRelative.x << " " << mapRelative.y << " " << result.x << " " << result.y);
 
       tempMap[position] = 1;
 
