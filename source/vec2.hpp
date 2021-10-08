@@ -80,7 +80,7 @@ struct Vec2 : public Vector2{
   Vec2 rotate(const double th) const{
     Vec2 result;
 
-    float rad = degToRad(th);
+    float rad = degToRad(360-th);
 
     result.x = std::cos(rad) * this->x - std::sin(rad) * this->y;
     result.y = std::sin(rad) * this->x + std::cos(rad) * this->y;
@@ -91,7 +91,7 @@ struct Vec2 : public Vector2{
   Vec2 rotate(const double th, const Vec2& origin) const{
     Vec2 newPoint = *this - origin;
 
-    return newPoint.rotate(th);
+    return newPoint.rotate(th)+origin;
   }
 
   float length() const{
