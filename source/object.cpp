@@ -77,6 +77,7 @@ bool TetrisBlock::colliding(TetrisBlock *other){
 }
 
 void TetrisBlock::rotateLeft(){
+  std::array<bool, 25> tempMap = {};
   for (int i = 0; i < 25; i++){
     if(meta.map[i]){
       meta.map[i] = 0;
@@ -87,16 +88,25 @@ void TetrisBlock::rotateLeft(){
 
       Vec2 result = mapRelative.rotate(180, meta.rotationalOrigin);
 
+      int position = 0;
+      int deltaY;
 
-      result.x = result.x;
-      result.y = result.y;
+      deltaY = 5-result.y;
+      deltaY--;
 
-      LOG(mapRelative.x << " " << mapRelative.y << " " << result.x << " " << result.y);
+      if (deltaY > 0){
+        position += 5*deltaY;
+        position += result.x;
+      }
 
-      int position = ((int)result.y / 5) + (int)result.x;
+      else{
+        position = result.x;
+      }
 
-      meta.map[position] = 1;
+      tempMap[position] = 1;
 
     }
   }
+
+  meta.map = tempMap;
 }
