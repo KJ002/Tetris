@@ -83,18 +83,20 @@ void TetrisBlock::rotateLeft(){
 
       Vec2 mapRelative(i%5, (int)i/5);
 
-      Vec2 result = mapRelative.rotate(90, meta.rotationalOrigin);
+      mapRelative.y--;
 
-      result.x = round(result.x);
-      result.y = round(result.y);
+      Vec2 result = mapRelative.rotate(180, meta.rotationalOrigin);
 
-      int position = ((int)result.y / 5) + result.x;
+
+      result.x = result.x;
+      result.y = result.y;
+
+      LOG(mapRelative.x << " " << mapRelative.y << " " << result.x << " " << result.y);
+
+      int position = ((int)result.y / 5) + (int)result.x;
 
       meta.map[position] = 1;
 
-      LOG("x");
-
-      //std::cout << (Vec2){1, 0}.rotate(90).x << " " << (Vec2){1, 0}.rotate(90).y << std::endl;
     }
   }
 }

@@ -23,4 +23,6 @@ struct TetrisBlock : public Object{
   TetrisBlock(int x, int y, int shape);
   bool colliding(TetrisBlock* other);
   void draw() const override;
+  void rotateLeft();
+  void rotateRight();
 };
