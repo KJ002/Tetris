@@ -86,7 +86,42 @@ void TetrisBlock::rotateLeft(){
 
       mapRelative.y--;
 
-      Vec2 result = mapRelative.rotate(180, meta.rotationalOrigin);
+      Vec2 result = mapRelative.rotate(90, meta.rotationalOrigin);
+
+      int position = 0;
+      int deltaY;
+
+      deltaY = 5-result.y;
+      deltaY--;
+
+      if (deltaY > 0){
+        position += 5*deltaY;
+        position += result.x;
+      }
+
+      else{
+        position = result.x;
+      }
+
+      tempMap[position] = 1;
+
+    }
+  }
+
+  meta.map = tempMap;
+}
+
+void TetrisBlock::rotateRight(){
+  std::array<bool, 25> tempMap = {};
+  for (int i = 0; i < 25; i++){
+    if(meta.map[i]){
+      meta.map[i] = 0;
+
+      Vec2 mapRelative(i%5, (int)i/5);
+
+      mapRelative.y--;
+
+      Vec2 result = mapRelative.rotate(270, meta.rotationalOrigin);
 
       int position = 0;
       int deltaY;
