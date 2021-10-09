@@ -1,5 +1,6 @@
 #include "tetris.hpp"
 #include "models.hpp"
+#include "object.hpp"
 #include <raylib.h>
 
 Tetris::Tetris(
@@ -14,11 +15,19 @@ Tetris::Tetris(
 
 void Tetris::spawnShape(){
   TetrisBlock * x = new TetrisBlock((GetScreenWidth()/2)-20, 10, 1);
+
+  current = x;
   shapes.push_back(x);
   display.attachShape(x);
 }
 
+void Tetris::moveDown(){
+  current->meta.appendY(20);
+}
+
 void Tetris::start(){
+  spawnShape();
+
   while (!WindowShouldClose()){
 
     // Game drawing loop
@@ -27,6 +36,8 @@ void Tetris::start(){
     ClearBackground(RAYWHITE);
     display.drawShape();
     EndDrawing();
+
+    if (IsKeyDown(KEY_S)) moveDown();
   }
 
   display.closeScreen();
