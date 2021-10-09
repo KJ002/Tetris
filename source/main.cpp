@@ -1,41 +1,16 @@
-#include <raylib.h>
-#include <iostream>
-
-#include "display.hpp"
-#include "object.hpp"
+#include "tetris.hpp"
 
 #define LOG(x) std::cout << x << std::endl
-#define screenWidth 800
-#define screenHeight 450
+#define screenWidth 450
+#define screenHeight 800
 #define screenTitle "Tetris - KJ002"
 #define screenFPS 60
 
 
 int main(){
-  Display screen(
-    screenWidth,
-    screenHeight,
-    screenTitle,
-    screenFPS
-  );
+  Tetris game(screenWidth, screenHeight, screenTitle, screenFPS);
 
-  TetrisBlock x(100, 10, 0);
-  TetrisBlock y(100, 70, 0);
-
-  screen.attachShape(&x);
-  screen.attachShape(&y);
-
-  y.active = false;
-
-  while (!WindowShouldClose()){
-    BeginDrawing();
-    ClearBackground(RAYWHITE);
-    screen.drawShape();
-    EndDrawing();
-    x.colliding(&y);
-  }
-
-  screen.closeScreen();
+  game.start();
 
   return 0;
 }
