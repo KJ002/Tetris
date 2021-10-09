@@ -1,7 +1,7 @@
 #include "tetris.hpp"
 
-#define screenWidth 450
-#define screenHeight 800
+#define screenWidth 100
+#define screenHeight 200
 #define screenTitle "Tetris - KJ002"
 #define screenFPS 60
 
