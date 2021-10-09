@@ -14,6 +14,9 @@ struct TetrisMeta{
   void setX(const int x);
   void setY(const int y);
 
+  int appendX(const int x);
+  int appendY(const int y);
+
   TetrisMeta(int x, int y, int shape);
   TetrisMeta();
 };

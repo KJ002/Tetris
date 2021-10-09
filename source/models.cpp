@@ -8,13 +8,37 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
   if (!shape){
     map = {
       0, 0, 0, 0, 0,
-      0, 0, 0, 1, 0,
-      0, 0, 0, 1, 0,
-      0, 0, 0, 1, 0,
-      0, 0, 0, 1, 0,
+      0, 0, 1, 0, 0,
+      0, 0, 1, 0, 0,
+      0, 0, 1, 0, 0,
+      0, 0, 1, 0, 0,
     };
 
     rotationalOrigin = (Vec2){2.5, 1.5};
+  }
+
+  if (shape == 1){
+     map = {
+      0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0,
+      0, 0, 1, 0, 0,
+      0, 0, 1, 0, 0,
+      0, 1, 1, 0, 0,
+    };
+
+    rotationalOrigin = (Vec2){2, 1};
+  }
+
+  if (shape == 2){
+     map = {
+      0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0,
+      0, 1, 0, 0, 0,
+      0, 1, 0, 0, 0,
+      0, 1, 1, 0, 0,
+    };
+
+    rotationalOrigin = (Vec2){1, 1};
   }
 }
 
@@ -36,4 +60,14 @@ void TetrisMeta::setX(const int x){
 
 void TetrisMeta::setY(const int y){
   origin.y = (float)y;
+}
+
+int TetrisMeta::appendX(const int x){
+  setX(getX()+x);
+  return getX();
+}
+
+int TetrisMeta::appendY(const int y){
+  setY(getY()+y);
+  return getY();
 }
