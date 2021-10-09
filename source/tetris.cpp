@@ -22,7 +22,19 @@ void Tetris::spawnShape(){
 }
 
 void Tetris::moveDown(){
-  current->meta.appendY(20);
+  current->meta.appendY(10);
+}
+
+void Tetris::moveLeft(){
+  current->meta.appendX(-10);
+}
+
+void Tetris::moveRight(){
+  current->meta.appendX(10);
+}
+
+void Tetris::rotate(){
+  current->rotateRight();
 }
 
 void Tetris::start(){
@@ -37,7 +49,12 @@ void Tetris::start(){
     display.drawShape();
     EndDrawing();
 
-    if (IsKeyDown(KEY_S)) moveDown();
+    if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
+      if (IsKeyPressed(KEY_W)) rotate();
+      if (IsKeyPressed(KEY_A)) moveLeft();
+      if (IsKeyPressed(KEY_D)) moveRight();
+      if (IsKeyPressed(KEY_S)) moveDown();
+    }
   }
 
   display.closeScreen();

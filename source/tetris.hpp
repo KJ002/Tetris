@@ -11,6 +11,9 @@ private:
 
   void spawnShape();
   void moveDown();
+  void moveLeft();
+  void moveRight();
+  void rotate();
 
 public:
   Tetris(
@@ -21,5 +24,4 @@ public:
   );
 
   void start();
-
 };
