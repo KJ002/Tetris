@@ -24,30 +24,7 @@ struct TetrisMeta{
 };
 
 
-class timePoint{
-private:
-  std::chrono::time_point<std::chrono::system_clock> time;
+struct timePoint{
+  std::chrono::time_point<std::chrono::steady_clock> time;
   bool isSet = false;
-public:
-  timePoint(){
-    time = timeNow();
-    isSet = true;
-  }
-
-  timePoint(std::chrono::time_point<std::chrono::system_clock> time){
-    this->time = time;
-    isSet = true;
-  }
-
-  std::chrono::time_point<std::chrono::system_clock> getTime() const{
-    return time;
-  }
-
-  void setTime(std::chrono::time_point<std::chrono::system_clock> time){
-    this->time = time;
-  }
-
-  void now(){
-    time = timeNow();
-  }
 };
