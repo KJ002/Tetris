@@ -1,6 +1,8 @@
 #pragma once
 #include "display.hpp"
 #include "object.hpp"
+#include "models.hpp"
+#include <chrono>
 #include <vector>
 
 class Tetris{
@@ -9,10 +11,15 @@ private:
   std::vector<TetrisBlock*> shapes;
   TetrisBlock* current;
 
+  timePoint lastTime;
+  std::chrono::duration<double> deltaTimeDur;
+  double deltaTime;
+
   void spawnShape();
   void moveDown();
   void moveLeft();
   void moveRight();
+  void deltaMoveDown();
   void rotate();
 
 public:
