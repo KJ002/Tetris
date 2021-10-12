@@ -16,8 +16,18 @@ struct TetrisMeta{
   void setX(const int x);
   void setY(const int y);
 
+  void setX(const float x);
+  void setY(const float y);
+
+  void set(const Vec2 v);
+
   int appendX(const int x);
   int appendY(const int y);
+
+  int appendX(const float x);
+  int appendY(const float y);
+
+  Vec2 append(const Vec2 v);
 
   TetrisMeta(int x, int y, int shape);
   TetrisMeta();

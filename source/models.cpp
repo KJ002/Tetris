@@ -62,12 +62,30 @@ void TetrisMeta::setY(const int y){
   origin.y = (float)y;
 }
 
+void TetrisMeta::setX(const float x){
+  origin.x = x;
+}
+
+void TetrisMeta::setY(const float y){
+  origin.y = y;
+}
+
+void TetrisMeta::set(const Vec2 v){
+  origin = v;
+}
+
 int TetrisMeta::appendX(const int x){
-  setX(getX()+x);
-  return getX();
+  origin.x += x;
+  return origin.x;
 }
 
 int TetrisMeta::appendY(const int y){
-  setY(getY()+y);
-  return getY();
+  origin.y += y;
+  return origin.y;
+}
+
+Vec2 TetrisMeta::append(const Vec2 v){
+  origin = origin + v;
+
+  return origin;
 }
