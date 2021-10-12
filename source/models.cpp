@@ -84,6 +84,16 @@ int TetrisMeta::appendY(const int y){
   return origin.y;
 }
 
+float TetrisMeta::appendX(const float x){
+  origin.x += x;
+  return origin.x;
+}
+
+float TetrisMeta::appendY(const float y){
+  origin.y += y;
+  return origin.y;
+}
+
 Vec2 TetrisMeta::append(const Vec2 v){
   origin = origin + v;
 

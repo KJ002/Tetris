@@ -24,8 +24,8 @@ struct TetrisMeta{
   int appendX(const int x);
   int appendY(const int y);
 
-  int appendX(const float x);
-  int appendY(const float y);
+  float appendX(const float x);
+  float appendY(const float y);
 
   Vec2 append(const Vec2 v);
 
