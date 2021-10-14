@@ -23,6 +23,7 @@ void Tetris::spawnShape(){
   TetrisBlock * x = new TetrisBlock((GetScreenWidth()/2)-20, 10, 1);
 
   current = x;
+  currentBlockBuffer = 0;
   shapes.push_back(x);
   display.attachShape(x);
 }
