@@ -13,6 +13,8 @@ struct TetrisMeta{
   int getX() const;
   int getY() const;
 
+  Vec2 get() const;
+
   void setX(const int x);
   void setY(const int y);
 

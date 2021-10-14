@@ -54,6 +54,10 @@ int TetrisMeta::getY() const{
   return origin.y;
 }
 
+Vec2 TetrisMeta::get() const{
+  return origin;
+}
+
 void TetrisMeta::setX(const int x){
   origin.x = (float)x;
 }
