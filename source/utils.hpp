@@ -13,3 +13,7 @@ template<class T>
 int round(T x){
   return (int)(x + .5);
 }
+
+int intDiv(int x, int y){
+  return x/y;
+}
