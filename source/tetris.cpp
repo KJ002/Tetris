@@ -41,7 +41,7 @@ void Tetris::moveRight(){
 }
 
 void Tetris::deltaMoveDown(){
-  currentBlockBuffer += 10*deltaTime;
+  currentBlockBuffer += 5*deltaTime;
 
   if (currentBlockBuffer >= 10){
     moveDown();
@@ -59,7 +59,7 @@ void Tetris::start(){
   while (!WindowShouldClose()){
 
     if (lastTime.isSet){
-      deltaTime = (timeNow() - lastTime.time).count()/(pow(10, 5));
+      deltaTime = (timeNow() - lastTime.time).count()/(pow(10, 6));
     }
 
     if (!lastTime.isSet){
@@ -84,6 +84,9 @@ void Tetris::start(){
     deltaMoveDown();
 
     lastTime.time = timeNow();
+
+    LOG(current->getPosition(25).y);
+
   }
 
   display.closeScreen();
