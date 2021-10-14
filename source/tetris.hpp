@@ -15,6 +15,8 @@ private:
   std::chrono::duration<double> deltaTimeDur;
   double deltaTime;
 
+  float currentBlockBuffer = 0;
+
   void spawnShape();
   void moveDown();
   void moveLeft();

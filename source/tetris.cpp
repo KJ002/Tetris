@@ -6,9 +6,8 @@
 
 #define timeNow std::chrono::steady_clock::now
 
-// Lazy debugging
 #include <iostream>
-#define LOG(x) std::cout << x << std::endl;
+#define LOG(x) std::cout << x << std::endl
 
 Tetris::Tetris(
   int screenWidth,
@@ -41,7 +40,12 @@ void Tetris::moveRight(){
 }
 
 void Tetris::deltaMoveDown(){
-  current->meta.appendY(10*deltaTime);
+  currentBlockBuffer += 10*deltaTime;
+
+  if (currentBlockBuffer >= 10){
+    moveDown();
+    currentBlockBuffer-=10;
+  }
 }
 
 void Tetris::rotate(){
