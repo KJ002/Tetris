@@ -141,3 +141,11 @@ void TetrisBlock::rotateRight(){
 
   meta.map = tempMap;
 }
+
+Vec2 TetrisBlock::getPosition(int x){
+  Vec2 result = meta.get();
+  result.x += (x%5)*10;
+  result.y += intDiv(x, 5)*10;
+
+  return result;
+}

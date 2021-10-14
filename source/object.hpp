@@ -1,5 +1,6 @@
 #pragma once
 #include "models.hpp"
+#include "vec2.hpp"
 
 struct Object{
   virtual void draw() const = 0;
@@ -25,4 +26,5 @@ struct TetrisBlock : public Object{
   void draw() const override;
   void rotateLeft();
   void rotateRight();
+  Vec2 getPosition(int x);
 };
