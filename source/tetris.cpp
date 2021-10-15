@@ -6,16 +6,12 @@
 
 #define timeNow std::chrono::steady_clock::now
 
-#include <iostream>
-#define LOG(x) std::cout << x << std::endl
-
 Tetris::Tetris(
   int screenWidth,
   int screenHeight,
   char * title,
   int screenFPS
 ):
-
   display(screenWidth, screenHeight, title, screenFPS)
 {}
 
@@ -65,6 +61,14 @@ bool Tetris::hasPassedYAxis(){
   return current->getPosition(i).y+10 >= GetScreenHeight();
 }
 
+bool Tetris::hasCollided(){
+  for (TetrisBlock* other : shapes){
+    if (other != current && other->colliding(current)) return true;
+  }
+
+  return false;
+}
+
 void Tetris::start(){
   spawnShape();
 
@@ -97,8 +101,7 @@ void Tetris::start(){
 
     lastTime.time = timeNow();
 
-
-    if (hasPassedYAxis()) spawnShape();
+    if (hasPassedYAxis() || hasCollided()) spawnShape();
 
   }
 
