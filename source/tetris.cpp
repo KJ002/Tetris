@@ -53,13 +53,25 @@ void Tetris::rotate(){
   current->rotateRight();
 }
 
+bool Tetris::hasPassedYAxis(){
+  int i = 25;
+  bool foundLowestIndex = false;
+
+  while (i && !foundLowestIndex){
+    i--;
+    foundLowestIndex = current->meta.map[i];
+  }
+
+  return current->getPosition(i).y+10 >= GetScreenHeight();
+}
+
 void Tetris::start(){
   spawnShape();
 
   while (!WindowShouldClose()){
 
     if (lastTime.isSet){
-      deltaTime = (timeNow() - lastTime.time).count()/(pow(10, 6));
+      deltaTime = (timeNow() - lastTime.time).count()/(pow(10, 5));
     }
 
     if (!lastTime.isSet){
@@ -85,7 +97,8 @@ void Tetris::start(){
 
     lastTime.time = timeNow();
 
-    LOG(current->getPosition(25).y);
+
+    if (hasPassedYAxis()) spawnShape();
 
   }
 

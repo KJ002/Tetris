@@ -24,6 +24,8 @@ private:
   void deltaMoveDown();
   void rotate();
 
+  bool hasPassedYAxis();
+
 public:
   Tetris(
     int screenWidth,
