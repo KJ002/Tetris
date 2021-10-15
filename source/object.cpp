@@ -43,10 +43,6 @@ void TetrisBlock::draw() const{
 }
 
 bool TetrisBlock::colliding(TetrisBlock *other){
-  // Check if we are comparing two active blocks
-
-  if (other->active)
-    return true;
 
   // Filter out "collide surfaces"
 
@@ -54,19 +50,14 @@ bool TetrisBlock::colliding(TetrisBlock *other){
     if (meta.map[i] &&
         !(safeGet<bool, 25>(i+5, meta.map))){
       for (int i2 = 0; i2 < 25; i2++){
-        if (other->meta.map[i2] &&
-            !(safeGet<bool, 25>(i2-5, other->meta.map))){
+        if (meta.map[i2]){
+          int thisX = getPosition(i+5).x;
+          int thisY = getPosition(i+5).y;
 
-          // Check that if 10 (width and height of each block) they overlap
+          int otherX = other->getPosition(i2).x;
+          int otherY = other->getPosition(i2).y;
 
-          int thisX = meta.getX()+((i%5)*10);
-          int thisY = meta.getY()+(((int)i/5)*10);
-
-          int otherX = other->meta.getX()+((i2%5)*10);
-          int otherY = other->meta.getY()+(((int)i2/5)*10);
-
-          if (thisX == otherX &&
-              std::abs(thisY-otherY) == 10)
+          if (thisX == otherX && thisY == otherY)
             return true;
         }
       }
