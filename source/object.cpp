@@ -50,7 +50,8 @@ bool TetrisBlock::colliding(TetrisBlock *other){
     if (meta.map[i] &&
         !(safeGet<bool, 25>(i+5, meta.map))){
       for (int i2 = 0; i2 < 25; i2++){
-        if (meta.map[i2]){
+        if (other->meta.map[i2] &&
+        !(safeGet<bool, 25>(i2-5, other->meta.map))){
 
           // Check for overlap
 
@@ -138,6 +139,7 @@ void TetrisBlock::rotateRight(){
 
 Vec2 TetrisBlock::getPosition(int x){
   Vec2 result = meta.get();
+
   result.x += (x%5)*10;
   result.y += intDiv(x, 5)*10;
 

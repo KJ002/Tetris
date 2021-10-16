@@ -63,7 +63,7 @@ bool Tetris::hasPassedYAxis(){
 
 bool Tetris::hasCollided(){
   for (TetrisBlock* other : shapes){
-    if (other != current && other->colliding(current)) return true;
+    if (other != current && current->colliding(other)) return true;
   }
 
   return false;

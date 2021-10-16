@@ -8,6 +8,7 @@
 class Tetris{
 private:
   Display display;
+
   std::vector<TetrisBlock*> shapes;
   TetrisBlock* current;
 
@@ -25,6 +26,7 @@ private:
   void rotate();
 
   bool hasPassedYAxis();
+  bool hasCollided();
 
 public:
   Tetris(
