@@ -51,6 +51,9 @@ bool TetrisBlock::colliding(TetrisBlock *other){
         !(safeGet<bool, 25>(i+5, meta.map))){
       for (int i2 = 0; i2 < 25; i2++){
         if (meta.map[i2]){
+
+          // Check for overlap
+
           int thisX = getPosition(i+5).x;
           int thisY = getPosition(i+5).y;
 
