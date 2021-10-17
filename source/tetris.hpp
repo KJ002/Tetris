@@ -28,7 +28,9 @@ private:
 
   bool hasPassedYAxis();
   bool hasCollided();
-  void cleanTable();
+  void cleanGlobalMap();
+  int posToIndex(int x, int y);
+  void updateGlobalMap();
 
 public:
   Tetris(

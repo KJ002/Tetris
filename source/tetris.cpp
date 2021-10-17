@@ -76,6 +76,37 @@ void Tetris::cleanGlobalMap(){
     globalMap[i] = 0;
 }
 
+int Tetris::posToIndex(int x, int y){
+  // Correct data
+  // x and y must ALWAYS be a multiple
+  // of 10 for this to work but due to the
+  // nature of tetris this should be fine
+
+  x = x/10;
+  y = y/10;
+
+  // Calculate index position
+
+  return (y*10)+x;
+}
+
+void Tetris::updateGlobalMap(){
+  cleanGlobalMap();
+
+  for (TetrisBlock* object : shapes){
+    for (int i = 0; i < 25; i++){
+      if (object->meta.map[i]){
+        int index = posToIndex(
+          object->getPosition(i).x,
+          object->getPosition(i).y
+        );
+
+        globalMap[index] = 1;
+      }
+    }
+  }
+}
+
 void Tetris::start(){
   spawnShape();
 
@@ -89,6 +120,8 @@ void Tetris::start(){
       lastTime.isSet = true;
       deltaTime = 0;
     }
+
+    updateGlobalMap();
 
     // Game drawing loop
 
