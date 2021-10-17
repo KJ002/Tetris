@@ -13,7 +13,9 @@ Tetris::Tetris(
   int screenFPS
 ):
   display(screenWidth, screenHeight, title, screenFPS)
-{}
+{
+  cleanGlobalMap();
+}
 
 void Tetris::spawnShape(){
   TetrisBlock * x = new TetrisBlock((GetScreenWidth()/2)-20, 10, 1);
@@ -67,6 +69,11 @@ bool Tetris::hasCollided(){
   }
 
   return false;
+}
+
+void Tetris::cleanGlobalMap(){
+  for (int i = 0; i < 200; i++)
+    globalMap[i] = 0;
 }
 
 void Tetris::start(){

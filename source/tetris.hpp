@@ -11,6 +11,7 @@ private:
 
   std::vector<TetrisBlock*> shapes;
   TetrisBlock* current;
+  std::array<bool, 200> globalMap;
 
   timePoint lastTime;
   std::chrono::duration<double> deltaTimeDur;
@@ -27,6 +28,7 @@ private:
 
   bool hasPassedYAxis();
   bool hasCollided();
+  void cleanTable();
 
 public:
   Tetris(
