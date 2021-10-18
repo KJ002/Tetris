@@ -7,10 +7,12 @@ Tetris::Tetris(
   int screenWidth,
   int screenHeight,
   char * title,
-  int screenFPS
+  int screenFPS,
+  bool debug
 ):
   display(screenWidth, screenHeight, title, screenFPS)
 {
+  this->debug = debug;
   cleanGlobalMap();
 }
 
@@ -38,7 +40,7 @@ void Tetris::moveRight(){
 }
 
 void Tetris::deltaMoveDown(){
-  currentBlockBuffer += 10*deltaTime;
+  currentBlockBuffer += 10*((debug) ? .01667 : deltaTime);
 
   if (currentBlockBuffer >= 10){
     moveDown();

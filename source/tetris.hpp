@@ -6,6 +6,8 @@
 
 class Tetris{
 private:
+  bool debug;
+
   Display display;
 
   std::vector<TetrisBlock*> shapes;
@@ -37,7 +39,8 @@ public:
     int screenWidth,
     int screenHeight,
     char * title,
-    int screenFPS = 60
+    int screenFPS = 60,
+    bool debug = false
   );
 
   void start();
