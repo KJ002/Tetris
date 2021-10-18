@@ -2,7 +2,6 @@
 #include "display.hpp"
 #include "object.hpp"
 #include "models.hpp"
-#include <chrono>
 #include <vector>
 
 class Tetris{
@@ -13,8 +12,7 @@ private:
   TetrisBlock* current;
   std::array<bool, 200> globalMap;
 
-  timePoint lastTime;
-  std::chrono::duration<double> deltaTimeDur;
+  double lastTime = GetTime();
   double deltaTime;
 
   float currentBlockBuffer = 0;
@@ -30,6 +28,8 @@ private:
   bool hasCollided();
   void cleanGlobalMap();
   int posToIndex(int x, int y);
+  int posToIndex(Vec2 v);
+  bool currentWillCollide(int direction);
   void updateGlobalMap();
 
 public:
