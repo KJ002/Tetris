@@ -125,10 +125,7 @@ void Tetris::updateGlobalMap(){
     if (object != current){
       for (int i = 0; i < 25; i++){
         if (object->meta.map[i]){
-          int index = posToIndex(
-            object->getPosition(i).x,
-            object->getPosition(i).y
-          );
+          int index = posToIndex(object->getPosition(i));
 
           globalMap[index] = 1;
         }
