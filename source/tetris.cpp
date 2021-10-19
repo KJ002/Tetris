@@ -106,18 +106,18 @@ int Tetris::posToIndex(Vec2 v){
 }
 
 bool Tetris::currentWillCollide(int direction){
-  std::array<bool, 25> result;
 
   for (int i = 0; i < 25; i++){
     if (current->meta.map[i]){
       Vec2 position = current->getPosition(i);
       position.x += direction;
 
-      result[i] = !globalMap[posToIndex(position)];
+      if (globalMap[posToIndex(position)])
+        return true;
     }
   }
 
-  return result == current->meta.map;
+  return false;
 }
 
 void Tetris::updateGlobalMap(){
