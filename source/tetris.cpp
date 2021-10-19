@@ -143,6 +143,8 @@ void Tetris::start(){
     deltaTime = GetTime() - lastTime;
     lastTime = GetTime();
 
+    if (hasPassedYAxis() || hasCollided()) spawnShape();
+
     updateGlobalMap();
 
     // Game drawing loop
@@ -155,19 +157,18 @@ void Tetris::start(){
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
       if (IsKeyPressed(KEY_W)) rotate();
 
-      if (IsKeyPressed(KEY_A))
+      if (IsKeyPressed(KEY_A) &&
+          !currentWillCollide(-10))
         moveLeft();
 
-      if (IsKeyPressed(KEY_D))
+      if (IsKeyPressed(KEY_D) &&
+          !currentWillCollide(10))
         moveRight();
 
       if (IsKeyPressed(KEY_S)) moveDown();
     }
 
     deltaMoveDown();
-
-
-    if (hasPassedYAxis() || hasCollided()) spawnShape();
 
   }
 
