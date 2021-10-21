@@ -2,6 +2,7 @@
 #include "models.hpp"
 #include "object.hpp"
 #include <raylib.h>
+#include <algorithm>
 
 #include <iostream>
 #define LOG(x) std::cout << x << std::endl
@@ -156,6 +157,16 @@ std::vector<int> Tetris::getFullLines(){
   return result;
 }
 
+void Tetris::purgeFullLines(std::vector<int> y){
+  for (TetrisBlock* x : shapes){
+    for (int i = 0; i < 25; i++){
+      if (std::find(y.begin(), y.end(), x->getPosition(i).y) != y.end()){
+        x->meta.map[i] = false;
+      }
+    }
+  }
+}
+
 void Tetris::start(){
   spawnShape();
 
@@ -189,6 +200,7 @@ void Tetris::start(){
     }
 
     deltaMoveDown();
+    purgeFullLines(getFullLines());
 
   }
 

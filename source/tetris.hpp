@@ -34,6 +34,7 @@ private:
   bool currentWillCollide(int direction);
   void updateGlobalMap();
   std::vector<int> getFullLines();
+  void purgeFullLines(std::vector<int> y);
 
 public:
   Tetris(
