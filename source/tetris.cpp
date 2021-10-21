@@ -3,6 +3,9 @@
 #include "object.hpp"
 #include <raylib.h>
 
+#include <iostream>
+#define LOG(x) std::cout << x << std::endl
+
 Tetris::Tetris(
   int screenWidth,
   int screenHeight,
@@ -134,6 +137,23 @@ void Tetris::updateGlobalMap(){
       }
     }
   }
+}
+
+std::vector<int> Tetris::getFullLines(){
+  std::vector<int> result;
+
+  for (int i = 0; i < 200; i+=10){
+    int total = 0;
+
+    for (int x = 0; x < 10; x++){
+      total += globalMap[i+x];
+    }
+
+    if (total == 10)
+      result.push_back(i);
+  }
+
+  return result;
 }
 
 void Tetris::start(){

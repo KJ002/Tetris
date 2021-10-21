@@ -33,6 +33,7 @@ private:
   int posToIndex(Vec2 v);
   bool currentWillCollide(int direction);
   void updateGlobalMap();
+  std::vector<int> getFullLines();
 
 public:
   Tetris(
