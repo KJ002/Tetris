@@ -5,9 +5,6 @@
 #include <algorithm>
 #include <vector>
 
-#include <iostream>
-#define LOG(x) std::cout << x << std::endl
-
 Tetris::Tetris(
   int screenWidth,
   int screenHeight,
@@ -181,6 +178,54 @@ void Tetris::adjustLines(std::vector<int> y){
   }
 }
 
+bool Tetris::currentWillBeOut(char direction){
+  if (direction == 'L'){
+    bool lowestSet = false;
+    int lowest;
+
+    for (int i = 0; i < 25; i++){
+      if (current->meta.map[i] && !lowestSet){
+        lowest = i;
+        lowestSet = true;
+      }
+
+      if (current->meta.map[i] && i%5 < lowest%5 && lowestSet){
+        lowest = i;
+      }
+    }
+
+    if (!lowestSet)
+      return false;
+
+    if (current->getPosition(lowest).x - 10 < 0)
+      return true;
+  }
+
+  if (direction == 'R'){
+    bool highestSet = false;
+    int highest;
+
+    for (int i = 0; i < 25; i++){
+      if (current->meta.map[i] && !highestSet){
+        highest = i;
+        highestSet = true;
+      }
+
+      if (current->meta.map[i] && i%5 > highest%5 && highestSet){
+        highest = i;
+      }
+    }
+
+    if (!highestSet)
+      return false;
+
+    if (current->getPosition(highest).x + 10 > 90)
+      return true;
+  }
+
+  return false;
+}
+
 void Tetris::start(){
   spawnShape();
 
@@ -203,11 +248,13 @@ void Tetris::start(){
       if (IsKeyPressed(KEY_W)) rotate();
 
       if (IsKeyPressed(KEY_A) &&
-          !currentWillCollide(-10))
+          !currentWillCollide(-10) &&
+          !currentWillBeOut('L'))
         moveLeft();
 
       if (IsKeyPressed(KEY_D) &&
-          !currentWillCollide(10))
+          !currentWillCollide(10) &&
+          !currentWillBeOut('R'))
         moveRight();
 
       if (IsKeyPressed(KEY_S)) moveDown();

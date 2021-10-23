@@ -36,6 +36,7 @@ private:
   std::vector<int> getFullLines();
   void purgeFullLines(std::vector<int> y);
   void adjustLines(std::vector<int> y);
+  bool currentWillBeOut(char direction = 'L');
 
 public:
   Tetris(
