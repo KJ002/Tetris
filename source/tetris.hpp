@@ -35,6 +35,7 @@ private:
   void updateGlobalMap();
   std::vector<int> getFullLines();
   void purgeFullLines(std::vector<int> y);
+  void adjustLines(std::vector<int> y);
 
 public:
   Tetris(

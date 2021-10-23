@@ -3,6 +3,7 @@
 #include "object.hpp"
 #include <raylib.h>
 #include <algorithm>
+#include <vector>
 
 #include <iostream>
 #define LOG(x) std::cout << x << std::endl
@@ -167,6 +168,19 @@ void Tetris::purgeFullLines(std::vector<int> y){
   }
 }
 
+void Tetris::adjustLines(std::vector<int> y){
+  for (int x : y){
+    for (TetrisBlock* shape : shapes){
+      for (int i = 24; i >= 0; i--){
+        if (shape->meta.map[i] && shape->getPosition(i).y < x){
+          shape->meta.appendY(10);
+          break;
+        }
+      }
+    }
+  }
+}
+
 void Tetris::start(){
   spawnShape();
 
@@ -200,7 +214,10 @@ void Tetris::start(){
     }
 
     deltaMoveDown();
-    purgeFullLines(getFullLines());
+
+    std::vector<int> fullLines = getFullLines();
+    purgeFullLines(fullLines);
+    adjustLines(fullLines);
 
   }
 
