@@ -3,6 +3,8 @@
 
 
 TetrisMeta::TetrisMeta(int x, int y, int shape){
+  shape = shape % 7;
+
   origin = (Vec2){(float)x, (float)y};
 
   if (!shape){
@@ -21,12 +23,12 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
      map = {
       0, 0, 0, 0, 0,
       0, 0, 0, 0, 0,
-      0, 0, 1, 0, 0,
-      0, 0, 1, 0, 0,
-      0, 1, 1, 0, 0,
+      0, 1, 0, 0, 0,
+      0, 1, 0, 0, 0,
+      1, 1, 0, 0, 0,
     };
 
-    rotationalOrigin = (Vec2){2, 1};
+    rotationalOrigin = (Vec2){1, 1};
   }
 
   if (shape == 2){
@@ -36,6 +38,54 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
       0, 1, 0, 0, 0,
       0, 1, 0, 0, 0,
       0, 1, 1, 0, 0,
+    };
+
+    rotationalOrigin = (Vec2){1, 1};
+  }
+
+  if (shape == 3){
+     map = {
+      0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0,
+      0, 1, 1, 0, 0,
+      0, 1, 1, 0, 0,
+      0, 0, 0, 0, 0,
+    };
+
+    rotationalOrigin = (Vec2){1.5, 1.5};
+  }
+
+   if (shape == 4){
+     map = {
+      0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0,
+      0, 1, 1, 0, 0,
+      1, 1, 0, 0, 0,
+      0, 0, 0, 0, 0,
+    };
+
+    rotationalOrigin = (Vec2){1, 1};
+  }
+
+  if (shape == 5){
+     map = {
+      0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0,
+      0, 1, 0, 0, 0,
+      1, 1, 1, 0, 0,
+      0, 0, 0, 0, 0,
+    };
+
+    rotationalOrigin = (Vec2){1, 1};
+  }
+
+  if (shape == 6){
+     map = {
+      0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0,
+      1, 1, 0, 0, 0,
+      0, 1, 1, 0, 0,
+      0, 0, 0, 0, 0,
     };
 
     rotationalOrigin = (Vec2){1, 1};
