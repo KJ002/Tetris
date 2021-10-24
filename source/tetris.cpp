@@ -4,6 +4,7 @@
 #include <raylib.h>
 #include <algorithm>
 #include <vector>
+#include <cstdlib>
 
 Tetris::Tetris(
   int screenWidth,
@@ -19,7 +20,7 @@ Tetris::Tetris(
 }
 
 void Tetris::spawnShape(){
-  TetrisBlock * x = new TetrisBlock((GetScreenWidth()/2)-20, 10, 1);
+  TetrisBlock * x = new TetrisBlock((GetScreenWidth()/2)-20, 10, rand());
 
 
   currentBlockBuffer = 0;
