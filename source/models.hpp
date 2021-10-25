@@ -1,6 +1,5 @@
 #pragma once
 #include <array>
-#include <chrono>
 #include "vec2.hpp"
 
 #define timeNow std::chrono::system_clock::now
@@ -33,10 +32,4 @@ struct TetrisMeta{
 
   TetrisMeta(int x, int y, int shape);
   TetrisMeta();
-};
-
-
-struct timePoint{
-  std::chrono::time_point<std::chrono::steady_clock> time;
-  bool isSet = false;
 };
