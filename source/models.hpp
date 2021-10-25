@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include <raylib.h>
 #include "vec2.hpp"
 
 #define timeNow std::chrono::system_clock::now
@@ -8,6 +9,7 @@ struct TetrisMeta{
   std::array<bool, 25> map;
   Vec2 origin;
   Vec2 rotationalOrigin;
+  Color colour;
 
   int getX() const;
   int getY() const;
