@@ -241,7 +241,7 @@ void Tetris::start(){
     // Game drawing loop
 
     BeginDrawing();
-    ClearBackground(RAYWHITE);
+    ClearBackground(BLACK);
     display.drawShape();
     EndDrawing();
 
