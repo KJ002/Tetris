@@ -35,7 +35,7 @@ void TetrisBlock::draw() const{
         meta.getY()+(deltaY*10),
         10,
         10,
-        BLUE
+        meta.colour
       );
 
     }

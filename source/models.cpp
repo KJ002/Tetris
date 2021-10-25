@@ -1,5 +1,6 @@
 #include "models.hpp"
 #include <array>
+#include <raylib.h>
 
 
 TetrisMeta::TetrisMeta(int x, int y, int shape){
@@ -17,6 +18,7 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
     };
 
     rotationalOrigin = (Vec2){2.5, 1.5};
+    colour = BLUE;
   }
 
   if (shape == 1){
@@ -29,6 +31,7 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
     };
 
     rotationalOrigin = (Vec2){1, 1};
+    colour = DARKBLUE;
   }
 
   if (shape == 2){
@@ -41,6 +44,8 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
     };
 
     rotationalOrigin = (Vec2){1, 1};
+    colour = GOLD;
+
   }
 
   if (shape == 3){
@@ -53,6 +58,7 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
     };
 
     rotationalOrigin = (Vec2){1.5, 1.5};
+    colour = YELLOW;
   }
 
    if (shape == 4){
@@ -65,6 +71,7 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
     };
 
     rotationalOrigin = (Vec2){1, 1};
+    colour = LIME;
   }
 
   if (shape == 5){
@@ -77,6 +84,7 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
     };
 
     rotationalOrigin = (Vec2){1, 1};
+    colour = MAGENTA;
   }
 
   if (shape == 6){
@@ -89,6 +97,7 @@ TetrisMeta::TetrisMeta(int x, int y, int shape){
     };
 
     rotationalOrigin = (Vec2){1, 1};
+    colour = RED;
   }
 }
 
