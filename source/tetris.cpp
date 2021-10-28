@@ -70,6 +70,12 @@ void Tetris::correctPosition(){
           !currentWillBeOut('R'))
         moveRight();
     }
+
+    BeginDrawing();
+    ClearBackground(BLACK);
+    display.drawShape();
+    EndDrawing();
+
   }
 }
 
@@ -142,15 +148,12 @@ bool Tetris::currentWillCollideX(int direction){
 }
 
 bool Tetris::currentWillCollideY(int direction){
+  TetrisBlock future = *current;
 
-  for (int i = 0; i < 25; i++){
-    if (current->meta.map[i]){
-      Vec2 position = current->getPosition(i);
-      position.y += direction;
+  future.meta.appendY(direction);
 
-      if (globalMap[posToIndex(position)])
-        return true;
-    }
+  for (TetrisBlock* other : shapes){
+    if (other != current && future.colliding(other)) return true;
   }
 
   return false;
@@ -264,21 +267,20 @@ void Tetris::start(){
   spawnShape();
 
   while (!WindowShouldClose()){
-    deltaTime = GetTime() - lastTime;
-    lastTime = GetTime();
-
-    if (currentWillCollideY(10) && !hasCollided()) correctPosition();
-
-    if (hasPassedYAxis() || hasCollided()) spawnShape();
-
-    updateGlobalMap();
-
-    // Game drawing loop
-
     BeginDrawing();
     ClearBackground(BLACK);
     display.drawShape();
     EndDrawing();
+
+    deltaTime = GetTime() - lastTime;
+    lastTime = GetTime();
+
+    if (hasPassedYAxis() || hasCollided()){
+      correctPosition();
+      if (hasPassedYAxis() || hasCollided()) spawnShape();
+    }
+
+    updateGlobalMap();
 
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
       if (IsKeyPressed(KEY_W)) rotate();
