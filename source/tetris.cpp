@@ -55,6 +55,24 @@ void Tetris::rotate(){
   current->rotateRight();
 }
 
+void Tetris::correctPosition(){
+  double time = GetTime();
+
+  while (time+1 > GetTime()){
+    if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) < 2){
+      if (IsKeyPressed(KEY_A) &&
+          !currentWillCollideX(-10) &&
+          !currentWillBeOut('L'))
+        moveLeft();
+
+      if (IsKeyPressed(KEY_D) &&
+          !currentWillCollideX(10) &&
+          !currentWillBeOut('R'))
+        moveRight();
+    }
+  }
+}
+
 bool Tetris::hasPassedYAxis(){
   int i = 25;
   bool foundLowestIndex = false;
@@ -108,12 +126,27 @@ int Tetris::posToIndex(Vec2 v){
   return (v.y*10)+v.x;
 }
 
-bool Tetris::currentWillCollide(int direction){
+bool Tetris::currentWillCollideX(int direction){
 
   for (int i = 0; i < 25; i++){
     if (current->meta.map[i]){
       Vec2 position = current->getPosition(i);
       position.x += direction;
+
+      if (globalMap[posToIndex(position)])
+        return true;
+    }
+  }
+
+  return false;
+}
+
+bool Tetris::currentWillCollideY(int direction){
+
+  for (int i = 0; i < 25; i++){
+    if (current->meta.map[i]){
+      Vec2 position = current->getPosition(i);
+      position.y += direction;
 
       if (globalMap[posToIndex(position)])
         return true;
@@ -234,6 +267,8 @@ void Tetris::start(){
     deltaTime = GetTime() - lastTime;
     lastTime = GetTime();
 
+    if (currentWillCollideY(10) && !hasCollided()) correctPosition();
+
     if (hasPassedYAxis() || hasCollided()) spawnShape();
 
     updateGlobalMap();
@@ -249,12 +284,12 @@ void Tetris::start(){
       if (IsKeyPressed(KEY_W)) rotate();
 
       if (IsKeyPressed(KEY_A) &&
-          !currentWillCollide(-10) &&
+          !currentWillCollideX(-10) &&
           !currentWillBeOut('L'))
         moveLeft();
 
       if (IsKeyPressed(KEY_D) &&
-          !currentWillCollide(10) &&
+          !currentWillCollideX(10) &&
           !currentWillBeOut('R'))
         moveRight();
 

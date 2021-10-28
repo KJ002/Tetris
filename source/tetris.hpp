@@ -25,13 +25,15 @@ private:
   void moveRight();
   void deltaMoveDown();
   void rotate();
+  void correctPosition();
 
   bool hasPassedYAxis();
   bool hasCollided();
   void cleanGlobalMap();
   int posToIndex(int x, int y);
   int posToIndex(Vec2 v);
-  bool currentWillCollide(int direction);
+  bool currentWillCollideX(int direction);
+  bool currentWillCollideY(int direction);
   void updateGlobalMap();
   std::vector<int> getFullLines();
   void purgeFullLines(std::vector<int> y);
