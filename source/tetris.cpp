@@ -20,11 +20,24 @@ Tetris::Tetris(
 }
 
 void Tetris::spawnShape(){
-  TetrisBlock * x = new TetrisBlock((GetScreenWidth()/2)-20, 10, rand());
+  TetrisBlock * x = new TetrisBlock(spawnPosition.x, spawnPosition.y, rand());
 
+  // Correct current position spawn to top of current
+
+  int top;
+
+  for (int i = 0; i < 25; i++){
+    if (x->meta.map[i]){
+      top = i;
+      break;
+    }
+  }
+
+  x->meta.appendY(-(x->getPosition(top).y));
+
+  // Clean up previous current values
 
   currentBlockBuffer = 0;
-
   current = x;
   shapes.push_back(x);
   display.attachShape(x);
