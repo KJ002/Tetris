@@ -3,6 +3,7 @@
 #include "object.hpp"
 #include "models.hpp"
 #include <vector>
+#include <raylib.h>
 
 class Tetris{
 private:
@@ -13,6 +14,7 @@ private:
   std::vector<TetrisBlock*> shapes;
   TetrisBlock* current;
   std::array<bool, 200> globalMap;
+  Vec2 spawnPosition = {(float)(GetScreenWidth()/2)-20, (float)0};
 
   double lastTime = GetTime();
   double deltaTime;
@@ -34,6 +36,7 @@ private:
   int posToIndex(Vec2 v);
   bool currentWillCollideX(int direction);
   bool currentWillCollideY(int direction);
+  bool currentCanRotate();
   void updateGlobalMap();
   std::vector<int> getFullLines();
   void purgeFullLines(std::vector<int> y);

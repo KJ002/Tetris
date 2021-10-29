@@ -159,6 +159,28 @@ bool Tetris::currentWillCollideY(int direction){
   return false;
 }
 
+bool Tetris::currentCanRotate(){
+  TetrisBlock future = *current;
+
+  future.rotateRight();
+
+  for (TetrisBlock* other : shapes){
+    if (other != current && future.colliding(other)) return false;
+  }
+
+  for (int i = 0; i < 25; i++){
+    if(future.meta.map[i] &&
+       (future.getPosition(i).x < 0 ||
+        future.getPosition(i).x >= 100 ||
+        future.getPosition(i).y < 0 ||
+        future.getPosition(i).y > 200))
+      return false;
+  }
+
+  return true;
+
+}
+
 void Tetris::updateGlobalMap(){
   cleanGlobalMap();
 
@@ -283,7 +305,7 @@ void Tetris::start(){
     updateGlobalMap();
 
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
-      if (IsKeyPressed(KEY_W)) rotate();
+      if (IsKeyPressed(KEY_W) && currentCanRotate()) rotate();
 
       if (IsKeyPressed(KEY_A) &&
           !currentWillCollideX(-10) &&
