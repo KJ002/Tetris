@@ -261,29 +261,26 @@ void Tetris::correctLines(std::vector<int> y){
         continue;
 
       for (int i = 24; i >= 0; i--){
+        bool doesIntersect = false;
 
-
-        if (shape->getPosition(i).y == x)
-          shape->meta.map[i] = false;
-
-        if (shape->meta.getY() < x &&
-            shape->meta.getY()+50 < x)
-          shape->meta.appendY(10);
-
-        if (shape->meta.getY() < x &&
-            shape->meta.getY()+50 >= x &&
-            i < 20){
-
-          if (shape->meta.map[i] && shape->getPosition(i).y < x){
-            shape->meta.map[i] = false;
-            shape->meta.map[i+5] = true;
+        if (shape->getPosition(i).y == x && i > 5){
+          doesIntersect = true;
+          for (int w = 0; w < 25; w++){
+            if (shape->getPosition(w).y > x){
+              shape->meta.map[w] = false;
+              shape->meta.map[w+5] = true;
+            }
           }
+          break;
+        }
+
+        if (shape->getPosition(i).y <= x)
+          doesIntersect = true;
+
+        if (i == 0 && !doesIntersect){
+          shape->meta.appendY(10);
         }
       }
-
-      if (shape->meta.getY() < x &&
-          shape->meta.getY()+50 < x)
-        shape->meta.appendY(10);
     }
   }
 }
@@ -374,7 +371,7 @@ void Tetris::start(){
     deltaMoveDown();
 
     std::vector<int> fullLines = getFullLines();
-    //purgeFullLines(fullLines);
+    purgeFullLines(fullLines);
     correctLines(fullLines);
 
   }
