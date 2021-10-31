@@ -6,6 +6,9 @@
 #include <vector>
 #include <cstdlib>
 
+#include <iostream>
+#define LOG(x) std::cout << x << std::endl
+
 Tetris::Tetris(
   int screenWidth,
   int screenHeight,
@@ -250,6 +253,41 @@ void Tetris::adjustLines(std::vector<int> y){
   }
 }
 
+void Tetris::correctLines(std::vector<int> y){
+  for (int x : y){
+    for (TetrisBlock* shape : shapes){
+
+      if (shape == current)
+        continue;
+
+      for (int i = 24; i >= 0; i--){
+
+
+        if (shape->getPosition(i).y == x)
+          shape->meta.map[i] = false;
+
+        if (shape->meta.getY() < x &&
+            shape->meta.getY()+50 < x)
+          shape->meta.appendY(10);
+
+        if (shape->meta.getY() < x &&
+            shape->meta.getY()+50 >= x &&
+            i < 20){
+
+          if (shape->meta.map[i] && shape->getPosition(i).y < x){
+            shape->meta.map[i] = false;
+            shape->meta.map[i+5] = true;
+          }
+        }
+      }
+
+      if (shape->meta.getY() < x &&
+          shape->meta.getY()+50 < x)
+        shape->meta.appendY(10);
+    }
+  }
+}
+
 bool Tetris::currentWillBeOut(char direction){
   if (direction == 'L'){
     bool lowestSet = false;
@@ -336,8 +374,8 @@ void Tetris::start(){
     deltaMoveDown();
 
     std::vector<int> fullLines = getFullLines();
-    purgeFullLines(fullLines);
-    adjustLines(fullLines);
+    //purgeFullLines(fullLines);
+    correctLines(fullLines);
 
   }
 
