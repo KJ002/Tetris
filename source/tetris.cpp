@@ -343,6 +343,12 @@ bool Tetris::currentWillBeOut(char direction){
 }
 
 void Tetris::start(){
+  /*
+  ** Tetris game main loop. All delta time,
+  ** key presses, logic and rendering is
+  ** done here.
+   */
+
   spawnShape();
 
   while (!WindowShouldClose()){
