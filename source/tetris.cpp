@@ -87,6 +87,9 @@ void Tetris::correctPosition(){
         moveRight();
     }
 
+    if (IsKeyPressed(KEY_S))
+      break;
+
     BeginDrawing();
     ClearBackground(BLACK);
     display.drawShape();
