@@ -23,6 +23,12 @@ Tetris::Tetris(
 }
 
 void Tetris::spawnShape(){
+  /*
+  ** When current has collided create a new shape
+  ** and allocate a pointer to it onto the heap and
+  ** push current into shapes.
+   */
+
   TetrisBlock * x = new TetrisBlock(spawnPosition.x, spawnPosition.y, rand());
 
   // Correct current position spawn to top of current
@@ -47,18 +53,37 @@ void Tetris::spawnShape(){
 }
 
 void Tetris::moveDown(){
+  /*
+  ** Alias to move current down.
+   */
+
   current->meta.appendY(10);
 }
 
 void Tetris::moveLeft(){
+  /*
+  ** Alias to move current left.
+   */
+
   current->meta.appendX(-10);
 }
 
 void Tetris::moveRight(){
+  /*
+  ** Alias to move current right.
+   */
+
   current->meta.appendX(10);
 }
 
 void Tetris::deltaMoveDown(){
+  /*
+  ** Appends the displacement of time multiplied
+  ** by the speed to currentBlockBuffer and when
+  ** it is greater that 10 move current down 10
+  ** and subtract 10 from currentBlockBuffer.
+   */
+
   currentBlockBuffer += 10*((debug) ? .01667 : deltaTime);
 
   if (currentBlockBuffer >= 10){
@@ -68,10 +93,20 @@ void Tetris::deltaMoveDown(){
 }
 
 void Tetris::rotate(){
+  /*
+  ** Alias to rotate current
+   */
+
   current->rotateRight();
 }
 
 void Tetris::correctPosition(){
+  /*
+  ** If current were about to collide with another
+  ** shape this function gives the user time to
+  ** fine tune the poition
+   */
+
   double time = GetTime();
 
   while (time+1 > GetTime()){
@@ -99,6 +134,10 @@ void Tetris::correctPosition(){
 }
 
 bool Tetris::hasPassedYAxis(){
+  /*
+  ** Checks if current has passed the y-axis
+   */
+
   int i = 25;
   bool foundLowestIndex = false;
 
@@ -111,6 +150,10 @@ bool Tetris::hasPassedYAxis(){
 }
 
 bool Tetris::hasCollided(){
+  /*
+  ** Check if current has collided with another shape.
+   */
+
   for (TetrisBlock* other : shapes){
     if (other != current && current->colliding(other)) return true;
   }
@@ -119,15 +162,20 @@ bool Tetris::hasCollided(){
 }
 
 void Tetris::cleanGlobalMap(){
+  /*
+  ** Cleans the global map.
+   */
+
   for (int i = 0; i < 200; i++)
     globalMap[i] = 0;
 }
 
 int Tetris::posToIndex(int x, int y){
-  // Correct data
-  // x and y must ALWAYS be a multiple
-  // of 10 for this to work but due to the
-  // nature of tetris this should be fine
+  /* Correct data
+  ** x and y must ALWAYS be a multiple
+  ** of 10 for this to work but due to the
+  ** nature of tetris this should be fine.
+  */
 
   x = x/10;
   y = y/10;
@@ -138,10 +186,11 @@ int Tetris::posToIndex(int x, int y){
 }
 
 int Tetris::posToIndex(Vec2 v){
-  // Correct data
-  // x and y must ALWAYS be a multiple
-  // of 10 for this to work but due to the
-  // nature of tetris this should be fine
+  /* Correct data
+  ** v.x and v.y must ALWAYS be a multiple
+  ** of 10 for this to work but due to the
+  ** nature of tetris this should be fine.
+  */
 
   v.x = v.x/10;
   v.y = v.y/10;
@@ -152,6 +201,10 @@ int Tetris::posToIndex(Vec2 v){
 }
 
 bool Tetris::currentWillCollideX(int direction){
+  /*
+  ** Checks if current will collide given
+  ** an x offset notated as 'direction'
+    */
 
   for (int i = 0; i < 25; i++){
     if (current->meta.map[i]){
@@ -167,6 +220,11 @@ bool Tetris::currentWillCollideX(int direction){
 }
 
 bool Tetris::currentWillCollideY(int direction){
+  /*
+  ** Detects if current will go bellow
+  ** the screen.
+   */
+
   TetrisBlock future = *current;
 
   future.meta.appendY(direction);
@@ -179,6 +237,11 @@ bool Tetris::currentWillCollideY(int direction){
 }
 
 bool Tetris::currentCanRotate(){
+  /*
+  ** Checks if current can rotate 90 degrees
+  ** clockwise without going out of bounds.
+   */
+
   TetrisBlock future = *current;
 
   future.rotateRight();
@@ -201,6 +264,13 @@ bool Tetris::currentCanRotate(){
 }
 
 void Tetris::updateGlobalMap(){
+  /*
+  ** Creates a "global map" of the Tetris board.
+  ** The global map is an array of indexs with a
+  ** true state if that index is occupied by a
+  ** tetris piece.
+   */
+
   cleanGlobalMap();
 
   for (TetrisBlock* object : shapes){
@@ -217,6 +287,12 @@ void Tetris::updateGlobalMap(){
 }
 
 std::vector<int> Tetris::getFullLines(){
+  /*
+  ** Gets all full lines of the Tetris board.
+  ** The functionality of Tetris blocks
+  ** outside of the board is undefined.
+    */
+
   std::vector<int> result;
 
   for (int i = 0; i < 200; i+=10){
@@ -234,6 +310,11 @@ std::vector<int> Tetris::getFullLines(){
 }
 
 void Tetris::purgeFullLines(std::vector<int> y){
+  /*
+  ** Deletes all valid indexs on a Tetris block map
+  ** provided the points of intersection.
+  */
+
   for (TetrisBlock* x : shapes){
     for (int i = 0; i < 25; i++){
       if (std::find(y.begin(), y.end(), x->getPosition(i).y) != y.end()){
@@ -243,20 +324,27 @@ void Tetris::purgeFullLines(std::vector<int> y){
   }
 }
 
-void Tetris::adjustLines(std::vector<int> y){
-  for (int x : y){
-    for (TetrisBlock* shape : shapes){
-      for (int i = 24; i >= 0; i--){
-        if (shape->meta.map[i] && shape->getPosition(i).y < x){
-          shape->meta.appendY(10);
-          break;
-        }
-      }
-    }
-  }
-}
-
 void Tetris::correctLines(std::vector<int> y){
+  /*
+  ** Corrects all positions of shapes by y += 10.
+  ** However this function has to account for the
+  ** deletion of a row upon the completeion of a
+  ** line and therefor it has to handle shapes with
+  ** an intersection and without an intersection
+  ** differently.
+  **
+  ** Shapes with an intersection have to have
+  ** all valid indexes on the map above the
+  ** position of intersection to be moved down
+  ** by 10. This is handled by mutating the map.
+  **
+  ** Shapes that do not have an intersection but
+  ** are above the point of intersection and moved
+  ** down by 10 on the y-axis.
+  **
+  ** All other shapes are left untouched.
+   */
+
   for (int x : y){
     for (TetrisBlock* shape : shapes){
 
@@ -295,6 +383,12 @@ void Tetris::correctLines(std::vector<int> y){
 }
 
 bool Tetris::currentWillBeOut(char direction){
+  /*
+  ** Detects if the current shape will
+  ** be out of bounds if Left or Right
+  ** keys were to be pressed.
+    */
+
   if (direction == 'L'){
     bool lowestSet = false;
     int lowest;
