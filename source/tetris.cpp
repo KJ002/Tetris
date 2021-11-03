@@ -202,8 +202,8 @@ int Tetris::posToIndex(Vec2 v){
 
 bool Tetris::currentWillCollide(Vec2 direction){
   /*
-  ** Detects if current will go bellow
-  ** the screen.
+  ** Detects if current will intersect another block
+  ** given a position offset in the form of a Vec2.
    */
 
   TetrisBlock future = *current;
