@@ -200,42 +200,6 @@ int Tetris::posToIndex(Vec2 v){
   return (v.y*10)+v.x;
 }
 
-bool Tetris::currentWillCollideX(int direction){
-  /*
-  ** Checks if current will collide given
-  ** an x offset notated as 'direction'
-    */
-
-  for (int i = 0; i < 25; i++){
-    if (current->meta.map[i]){
-      Vec2 position = current->getPosition(i);
-      position.x += direction;
-
-      if (globalMap[posToIndex(position)])
-        return true;
-    }
-  }
-
-  return false;
-}
-
-bool Tetris::currentWillCollideY(int direction){
-  /*
-  ** Detects if current will go bellow
-  ** the screen.
-   */
-
-  TetrisBlock future = *current;
-
-  future.meta.appendY(direction);
-
-  for (TetrisBlock* other : shapes){
-    if (other != current && future.colliding(other)) return true;
-  }
-
-  return false;
-}
-
 bool Tetris::currentWillCollide(Vec2 direction){
   /*
   ** Detects if current will go bellow

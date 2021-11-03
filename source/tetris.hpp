@@ -34,8 +34,6 @@ private:
   void cleanGlobalMap();
   int posToIndex(int x, int y);
   int posToIndex(Vec2 v);
-  bool currentWillCollideX(int direction);
-  bool currentWillCollideY(int direction);
   bool currentWillCollide(Vec2 direction);
   bool currentCanRotate();
   void updateGlobalMap();
