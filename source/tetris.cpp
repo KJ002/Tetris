@@ -112,12 +112,12 @@ void Tetris::correctPosition(){
   while (time+1 > GetTime()){
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) < 2){
       if (IsKeyPressed(KEY_A) &&
-          !currentWillCollideX(-10) &&
+          !currentWillCollide(Vec2(-10, 0)) &&
           !currentWillBeOut('L'))
         moveLeft();
 
       if (IsKeyPressed(KEY_D) &&
-          !currentWillCollideX(10) &&
+          !currentWillCollide(Vec2(10, 0)) &&
           !currentWillBeOut('R'))
         moveRight();
     }
@@ -236,6 +236,24 @@ bool Tetris::currentWillCollideY(int direction){
   return false;
 }
 
+bool Tetris::currentWillCollide(Vec2 direction){
+  /*
+  ** Detects if current will go bellow
+  ** the screen.
+   */
+
+  TetrisBlock future = *current;
+
+  future.meta.append(direction);
+
+  for (TetrisBlock* other : shapes){
+    if (other != current && future.colliding(other)) return true;
+  }
+
+  return false;
+
+}
+
 bool Tetris::currentCanRotate(){
   /*
   ** Checks if current can rotate 90 degrees
@@ -291,7 +309,7 @@ std::vector<int> Tetris::getFullLines(){
   ** Gets all full lines of the Tetris board.
   ** The functionality of Tetris blocks
   ** outside of the board is undefined.
-    */
+   */
 
   std::vector<int> result;
 
@@ -387,7 +405,7 @@ bool Tetris::currentWillBeOut(char direction){
   ** Detects if the current shape will
   ** be out of bounds if Left or Right
   ** keys were to be pressed.
-    */
+   */
 
   if (direction == 'L'){
     bool lowestSet = false;
@@ -465,12 +483,12 @@ void Tetris::start(){
       if (IsKeyPressed(KEY_W) && currentCanRotate()) rotate();
 
       if (IsKeyPressed(KEY_A) &&
-          !currentWillCollideX(-10) &&
+          !currentWillCollide(Vec2(-10, 0)) &&
           !currentWillBeOut('L'))
         moveLeft();
 
       if (IsKeyPressed(KEY_D) &&
-          !currentWillCollideX(10) &&
+          !currentWillCollide(Vec2(10, 0)) &&
           !currentWillBeOut('R'))
         moveRight();
 

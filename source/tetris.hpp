@@ -36,6 +36,7 @@ private:
   int posToIndex(Vec2 v);
   bool currentWillCollideX(int direction);
   bool currentWillCollideY(int direction);
+  bool currentWillCollide(Vec2 direction);
   bool currentCanRotate();
   void updateGlobalMap();
   std::vector<int> getFullLines();
