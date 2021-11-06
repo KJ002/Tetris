@@ -43,6 +43,7 @@ private:
   void purgeFullLines(std::vector<int> y);
   void adjustLines(std::vector<int> y);
   void correctLines(std::vector<int> y);
+  void updateScore(std::vector<int> y);
   bool currentWillBeOut(char direction = 'L');
 
 public:

@@ -175,7 +175,7 @@ int Tetris::posToIndex(int x, int y){
   ** x and y must ALWAYS be a multiple
   ** of 10 for this to work but due to the
   ** nature of tetris this should be fine.
-  */
+   */
 
   x = x/10;
   y = y/10;
@@ -295,7 +295,7 @@ void Tetris::purgeFullLines(std::vector<int> y){
   /*
   ** Deletes all valid indexs on a Tetris block map
   ** provided the points of intersection.
-  */
+   */
 
   for (TetrisBlock* x : shapes){
     for (int i = 0; i < 25; i++){
@@ -362,6 +362,15 @@ void Tetris::correctLines(std::vector<int> y){
 
     }
   }
+}
+
+void Tetris::updateScore(std::vector<int> y){
+  /*
+  ** Update score class attribute based on the
+  ** ammount of full lines found.
+   */
+
+  score += 100*y.size();
 }
 
 bool Tetris::currentWillBeOut(char direction){
@@ -464,6 +473,7 @@ void Tetris::start(){
     std::vector<int> fullLines = getFullLines();
     purgeFullLines(fullLines);
     correctLines(fullLines);
+    updateScore(fullLines);
 
   }
 
