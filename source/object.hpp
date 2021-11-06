@@ -31,14 +31,16 @@ struct TetrisBlock : public Object{
 };
 
 struct Text : public Object{
+  char * text;
+
   int x = 0;
   int y = 0;
 
   int fontSize = 10;
   Color colour;
 
-  Text(int x, int y, int fontSize, Color colour);
-  Text(Vec2 pos, int fonstSize, Color colour);
+  Text(char * text, int x, int y, int fontSize, Color colour);
+  Text(char * text, Vec2 pos, int fonstSize, Color colour);
   void draw() const override;
 
 };
