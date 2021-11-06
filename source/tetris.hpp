@@ -16,6 +16,8 @@ private:
   std::array<bool, 200> globalMap;
   Vec2 spawnPosition = {(float)(GetScreenWidth()/2)-20, (float)0};
 
+  int score = 0;
+
   double lastTime = GetTime();
   double deltaTime;
 
