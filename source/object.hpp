@@ -1,6 +1,7 @@
 #pragma once
 #include "models.hpp"
 #include "vec2.hpp"
+#include <raylib.h>
 
 struct Object{
   virtual void draw() const = 0;
@@ -27,4 +28,17 @@ struct TetrisBlock : public Object{
   void rotateLeft();
   void rotateRight();
   Vec2 getPosition(int x);
+};
+
+struct Text : public Object{
+  int x = 0;
+  int y = 0;
+
+  int fontSize = 10;
+  Color colour;
+
+  Text(int x, int y, int fontSize, Color colour);
+  Text(Vec2 pos, int fonstSize, Color colour);
+  void draw() const override;
+
 };
