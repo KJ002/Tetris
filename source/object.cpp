@@ -145,3 +145,14 @@ Vec2 TetrisBlock::getPosition(int x){
 
   return result;
 }
+
+Text::Text(int x, int y, int fontSize, Color colour){
+  this->x = x;
+  this->y = y;
+  this->fontSize = fontSize;
+  this->colour = colour;
+}
+
+Text::Text(Vec2 pos, int fontSize, Color colour){
+  Text(pos.x, pos.y, fontSize, colour);
+}
