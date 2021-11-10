@@ -39,8 +39,8 @@ struct Text : public Object{
   int fontSize = 10;
   Color colour;
 
-  Text(char * text, int x, int y, int fontSize, Color colour);
-  Text(char * text, Vec2 pos, int fonstSize, Color colour);
+  Text(char * text = (char*)"", int x = 0, int y = 0, int fontSize = 0, Color colour = BLACK);
+  Text(char * text = (char*)"", Vec2 pos = Vec2(0, 0), int fonstSize = 0, Color colour = BLACK);
   void draw() const override;
 
 };
