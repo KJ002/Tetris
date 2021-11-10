@@ -370,7 +370,11 @@ void Tetris::updateScore(std::vector<int> y){
   ** ammount of full lines found.
    */
 
+  // Update score based on intersections
   score += 100*y.size();
+
+  // Format score into a char array and pass to scoreObj.text
+  sprintf(scoreObj.text, "%i", score);
 }
 
 bool Tetris::currentWillBeOut(char direction){
