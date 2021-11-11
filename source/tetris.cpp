@@ -378,6 +378,16 @@ void Tetris::updateScore(std::vector<int> y){
 
   // Format score into a string and pass to scoreObj.text
   scoreObj.text = std::to_string(score);
+
+  // Adjust score position due to length change
+  updateScorePosition();
+}
+
+void Tetris::updateScorePosition(){
+  int textSize = MeasureText(scoreObj.text.data(), scoreObj.fontSize);
+  int delta = scoreObjNEPos.x - (scoreObj.x + textSize);
+
+  scoreObj.x += delta;
 }
 
 bool Tetris::currentWillBeOut(char direction){
