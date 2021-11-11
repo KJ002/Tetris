@@ -18,7 +18,7 @@ private:
 
   int score = 0;
 
-  Vec2 scoreObjNEPos = {50, 50};
+  Vec2 scoreObjNEPos = {90, 10};
   Text scoreObj = {"0", scoreObjNEPos, 11, RAYWHITE};
 
   double lastTime = GetTime();
