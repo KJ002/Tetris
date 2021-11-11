@@ -1,6 +1,7 @@
 #pragma once
 #include "models.hpp"
 #include "vec2.hpp"
+#include <string>
 #include <raylib.h>
 
 struct Object{
@@ -31,16 +32,14 @@ struct TetrisBlock : public Object{
 };
 
 struct Text : public Object{
-  char * text;
+  std::string text;
 
-  int x = 0;
-  int y = 0;
+  int x;
+  int y;
 
-  int fontSize = 10;
+  int fontSize;
   Color colour;
 
-  Text(char * text = (char*)"", int x = 0, int y = 0, int fontSize = 0, Color colour = BLACK);
-  Text(char * text = (char*)"", Vec2 pos = Vec2(0, 0), int fonstSize = 0, Color colour = BLACK);
+  Text(std::string text, Vec2 pos, int fonstSize, Color colour = BLACK);
   void draw() const override;
-
 };

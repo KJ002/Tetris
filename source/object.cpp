@@ -146,18 +146,19 @@ Vec2 TetrisBlock::getPosition(int x){
   return result;
 }
 
-Text::Text(char * text, int x, int y, int fontSize, Color colour){
-  this->text = text;
-  this->x = x;
-  this->y = y;
-  this->fontSize = fontSize;
-  this->colour = colour;
-}
-
-Text::Text(char * text, Vec2 pos, int fontSize, Color colour){
-  Text(text, pos.x, pos.y, fontSize, colour);
-}
+Text::Text(
+  std::string _text,
+  Vec2 _pos,
+  int _fontSize,
+  Color _colour
+):
+  text(_text),
+  x(_pos.x),
+  y(_pos.y),
+  fontSize(_fontSize),
+  colour(_colour)
+{}
 
 void Text::draw() const{
-  DrawText(text, x, y, fontSize, colour);
+  DrawText(text.data(), x, y, fontSize, colour);
 }
