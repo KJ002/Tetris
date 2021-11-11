@@ -17,7 +17,7 @@ private:
   Vec2 spawnPosition = {(float)(GetScreenWidth()/2)-20, (float)0};
 
   int score = 0;
-  Text scoreObj;
+  Text scoreObj = Text("0", Vec2(50, 50), 11, RAYWHITE);
 
   double lastTime = GetTime();
   double deltaTime;

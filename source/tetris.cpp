@@ -3,6 +3,7 @@
 #include "object.hpp"
 #include <raylib.h>
 #include <algorithm>
+#include <string>
 #include <vector>
 #include <cstdlib>
 
@@ -20,6 +21,8 @@ Tetris::Tetris(
 {
   this->debug = debug;
   cleanGlobalMap();
+
+  display.attachShape(&scoreObj);
 }
 
 void Tetris::spawnShape(){
@@ -373,8 +376,8 @@ void Tetris::updateScore(std::vector<int> y){
   // Update score based on intersections
   score += 100*y.size();
 
-  // Format score into a char array and pass to scoreObj.text
-  sprintf(scoreObj.text, "%i", score);
+  // Format score into a string and pass to scoreObj.text
+  scoreObj.text = std::to_string(score);
 }
 
 bool Tetris::currentWillBeOut(char direction){
