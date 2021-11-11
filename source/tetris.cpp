@@ -384,6 +384,10 @@ void Tetris::updateScore(std::vector<int> y){
 }
 
 void Tetris::updateScorePosition(){
+  /*
+  ** Correct scoreObj x position to align by the right opposed to the left
+   */
+
   int textSize = MeasureText(scoreObj.text.data(), scoreObj.fontSize);
   int delta = scoreObjNEPos.x - (scoreObj.x + textSize);
 
