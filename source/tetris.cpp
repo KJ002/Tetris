@@ -7,9 +7,6 @@
 #include <vector>
 #include <cstdlib>
 
-#include <iostream>
-#define LOG(x) std::cout << x << std::endl
-
 Tetris::Tetris(
   int screenWidth,
   int screenHeight,
