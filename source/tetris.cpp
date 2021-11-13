@@ -446,7 +446,7 @@ bool Tetris::currentWillBeOut(char direction){
 }
 
 bool Tetris::shouldGameOver(){
-  for (int i = 0; i < 5; i++){
+  for (int i = 0; i < 10; i++){
     if (globalMap[i])
       return true;
   }
