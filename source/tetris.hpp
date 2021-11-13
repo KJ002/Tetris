@@ -50,6 +50,7 @@ private:
   void updateScorePosition();
   bool currentWillBeOut(char direction = 'L');
   bool shouldGameOver();
+  void clearBoard();
 
 public:
   Tetris(

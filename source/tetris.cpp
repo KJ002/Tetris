@@ -454,6 +454,11 @@ bool Tetris::shouldGameOver(){
   return false;
 }
 
+void Tetris::clearBoard(){
+  score = 0;
+  shapes = {};
+}
+
 void Tetris::start(){
   /*
   ** Tetris game main loop. All delta time,
@@ -501,6 +506,9 @@ void Tetris::start(){
     purgeFullLines(fullLines);
     correctLines(fullLines);
     updateScore(fullLines);
+
+    if (shouldGameOver())
+      clearBoard();
 
   }
 
