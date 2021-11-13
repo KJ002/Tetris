@@ -49,6 +49,7 @@ private:
   void updateScore(std::vector<int> y);
   void updateScorePosition();
   bool currentWillBeOut(char direction = 'L');
+  bool shouldGameOver();
 
 public:
   Tetris(

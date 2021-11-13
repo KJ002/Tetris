@@ -445,6 +445,15 @@ bool Tetris::currentWillBeOut(char direction){
   return false;
 }
 
+bool Tetris::shouldGameOver(){
+  for (int i = 0; i < 5; i++){
+    if (globalMap[i])
+      return true;
+  }
+
+  return false;
+}
+
 void Tetris::start(){
   /*
   ** Tetris game main loop. All delta time,
