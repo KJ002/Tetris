@@ -482,12 +482,16 @@ void Tetris::start(){
     deltaTime = GetTime() - lastTime;
     lastTime = GetTime();
 
-    updateGlobalMap();
-
     if (hasPassedYAxis() || hasCollided()){
       correctPosition();
-      if (hasPassedYAxis() || hasCollided()) spawnShape();
+      if (hasPassedYAxis() || hasCollided()){
+        spawnShape();
+        continue;
+      }
     }
+
+    deltaMoveDown();
+    updateGlobalMap();
 
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
       if (IsKeyPressed(KEY_W) && currentCanRotate()) rotate();
@@ -504,8 +508,6 @@ void Tetris::start(){
 
       if (IsKeyPressed(KEY_S)) moveDown();
     }
-
-    deltaMoveDown();
 
     std::vector<int> fullLines = getFullLines();
     purgeFullLines(fullLines);
