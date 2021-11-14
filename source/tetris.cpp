@@ -259,9 +259,14 @@ void Tetris::updateGlobalMap(){
     if (object != current){
       for (int i = 0; i < 25; i++){
         if (object->meta.map[i]){
-          int index = posToIndex(object->getPosition(i));
 
-          globalMap[index] = 1;
+          Vec2 pos = object->getPosition(i);
+
+          if (pos.x >= 0 && pos.x < 100 && pos.y >= 0 && pos.y < 200){
+            int index = posToIndex(pos);
+
+            globalMap[index] = 1;
+          }
         }
       }
     }
@@ -477,12 +482,12 @@ void Tetris::start(){
     deltaTime = GetTime() - lastTime;
     lastTime = GetTime();
 
+    updateGlobalMap();
+
     if (hasPassedYAxis() || hasCollided()){
       correctPosition();
       if (hasPassedYAxis() || hasCollided()) spawnShape();
     }
-
-    updateGlobalMap();
 
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
       if (IsKeyPressed(KEY_W) && currentCanRotate()) rotate();
