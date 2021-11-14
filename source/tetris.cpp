@@ -482,9 +482,9 @@ void Tetris::start(){
     deltaTime = GetTime() - lastTime;
     lastTime = GetTime();
 
-    if (hasPassedYAxis() || hasCollided()){
+    if (hasPassedYAxis() || currentWillCollide(Vec2(0, 10))){
       correctPosition();
-      if (hasPassedYAxis() || hasCollided()){
+      if (hasPassedYAxis() || currentWillCollide(Vec2(0, 10))){
         spawnShape();
         continue;
       }
