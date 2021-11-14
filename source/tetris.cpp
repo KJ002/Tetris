@@ -33,16 +33,16 @@ void Tetris::spawnShape(){
 
   // Correct current position spawn to top of current
 
-  int top;
+  int bottom;
 
-  for (int i = 0; i < 25; i++){
+  for (int i = 24; i >= 0; i--){
     if (x->meta.map[i]){
-      top = i;
+      bottom = i;
       break;
     }
   }
 
-  x->meta.appendY(-(x->getPosition(top).y));
+  x->meta.appendY(-(x->getPosition(bottom).y));
 
   // Clean up previous current values
 
