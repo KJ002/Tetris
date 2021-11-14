@@ -35,7 +35,6 @@ private:
   void correctPosition();
 
   bool hasPassedYAxis();
-  bool hasCollided();
   void cleanGlobalMap();
   int posToIndex(int x, int y);
   int posToIndex(Vec2 v);

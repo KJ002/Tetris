@@ -149,18 +149,6 @@ bool Tetris::hasPassedYAxis(){
   return current->getPosition(i).y+10 >= GetScreenHeight();
 }
 
-bool Tetris::hasCollided(){
-  /*
-  ** Check if current has collided with another shape.
-   */
-
-  for (TetrisBlock* other : shapes){
-    if (other != current && current->colliding(other)) return true;
-  }
-
-  return false;
-}
-
 void Tetris::cleanGlobalMap(){
   /*
   ** Cleans the global map.
