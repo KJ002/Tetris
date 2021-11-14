@@ -7,7 +7,7 @@
 
 
 int main(){
-  Tetris game(screenWidth, screenHeight, screenTitle, screenFPS, true);
+  Tetris game(screenWidth, screenHeight, screenTitle, screenFPS);
 
   game.start();
 
