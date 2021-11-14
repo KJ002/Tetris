@@ -61,6 +61,10 @@ struct Vec2 : public Vector2{
     return !operator>(other);
   }
 
+  bool operator==(const Vec2& other) const{
+    return x == other.x && y == other.y;
+  }
+
   double sum() const{
     return x+y;
   }
