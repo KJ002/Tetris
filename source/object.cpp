@@ -44,28 +44,13 @@ void TetrisBlock::draw() const{
 
 bool TetrisBlock::colliding(TetrisBlock *other){
 
-  // Filter out "collide surfaces"
-
   for (int i = 0; i < 25; i++){
-    if (meta.map[i] &&
-        !(safeGet<bool, 25>(i+5, meta.map))){
+    if (meta.map[i])
       for (int i2 = 0; i2 < 25; i2++){
-        if (other->meta.map[i2] &&
-        !(safeGet<bool, 25>(i2-5, other->meta.map))){
-
-          // Check for overlap
-
-          int thisX = getPosition(i+5).x;
-          int thisY = getPosition(i+5).y;
-
-          int otherX = other->getPosition(i2).x;
-          int otherY = other->getPosition(i2).y;
-
-          if (thisX == otherX && thisY == otherY)
-            return true;
+        if (other->meta.map[i2] && getPosition(i) == other->getPosition(i2)){
+          return true;
         }
       }
-    }
   }
 
   return false;
