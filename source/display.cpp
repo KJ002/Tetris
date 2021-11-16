@@ -29,8 +29,6 @@ void Display::removeShape(Object * shape){
   }
 }
 
-
-
 void Display::drawShape() const{
   for (auto i : shapes)
     i->draw();
@@ -38,4 +36,8 @@ void Display::drawShape() const{
 
 void Display::closeScreen() const{
   CloseWindow();
+}
+
+std::vector<Object*> Display::exposeShapes() const{
+  return shapes;
 }
