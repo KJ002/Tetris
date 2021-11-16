@@ -12,10 +12,10 @@ private:
   Vector2 WtoS(Vector2);
 
 public:
-
   Display(int width, int height, const char* title, int fps);
   void attachShape(Object*);
-  void drawShape();
-  void closeScreen();
+  void removeShape(Object*);
+  void drawShape() const;
+  void closeScreen() const;
 
 };

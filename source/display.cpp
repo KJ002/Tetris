@@ -21,11 +21,21 @@ void Display::attachShape(Object* shape){
   shapes.push_back(shape);
 }
 
-void Display::drawShape(){
+void Display::removeShape(Object * shape){
+  for (size_t i = 0; i < shapes.size(); i++){
+    if (shapes[i] == shape){
+      shapes.erase(shapes.begin()+i);
+    }
+  }
+}
+
+
+
+void Display::drawShape() const{
   for (auto i : shapes)
     i->draw();
 }
 
-void Display::closeScreen(){
+void Display::closeScreen() const{
   CloseWindow();
 }
