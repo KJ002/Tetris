@@ -449,7 +449,13 @@ bool Tetris::shouldGameOver(){
 
 void Tetris::clearBoard(){
   score = 0;
-  shapes = {};
+
+  for (size_t i = 0; i < shapes.size(); i++){
+    if (shapes[i] != current){
+      display.removeShape(shapes[i]);
+      shapes.erase(shapes.begin()+i);
+    }
+  }
 }
 
 void Tetris::start(){
@@ -501,6 +507,7 @@ void Tetris::start(){
     purgeFullLines(fullLines);
     correctLines(fullLines);
     updateScore(fullLines);
+
 
     if (shouldGameOver())
       clearBoard();
