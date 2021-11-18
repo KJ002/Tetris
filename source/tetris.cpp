@@ -7,6 +7,8 @@
 #include <vector>
 #include <cstdlib>
 
+#include <iostream>
+
 Tetris::Tetris(
   int screenWidth,
   int screenHeight,
@@ -450,13 +452,13 @@ bool Tetris::shouldGameOver(){
 void Tetris::clearBoard(){
   score = 0;
 
-  for (size_t i = 0; i < shapes.size(); i++){
-    if (shapes[i] != current){
-      display.removeShape(shapes[i]);
-      delete shapes[i];
-      shapes.erase(shapes.begin()+i);
-    }
-  }
+  display.clear();
+  shapes.clear();
+
+  shapes.push_back(current);
+  display.attachShape(current);
+  display.attachShape(&scoreObj);
+
 }
 
 void Tetris::start(){
@@ -474,6 +476,11 @@ void Tetris::start(){
     display.drawShape();
     EndDrawing();
 
+    updateGlobalMap();
+
+    if (shouldGameOver())
+      clearBoard();
+
     deltaTime = GetTime() - lastTime;
     lastTime = GetTime();
 
@@ -485,8 +492,8 @@ void Tetris::start(){
       }
     }
 
+
     deltaMoveDown();
-    updateGlobalMap();
 
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
       if (IsKeyPressed(KEY_W) && currentCanRotate()) rotate();
@@ -508,10 +515,6 @@ void Tetris::start(){
     purgeFullLines(fullLines);
     correctLines(fullLines);
     updateScore(fullLines);
-
-
-    if (shouldGameOver())
-      clearBoard();
 
   }
 
