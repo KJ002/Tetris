@@ -453,6 +453,7 @@ void Tetris::clearBoard(){
   for (size_t i = 0; i < shapes.size(); i++){
     if (shapes[i] != current){
       display.removeShape(shapes[i]);
+      delete shapes[i];
       shapes.erase(shapes.begin()+i);
     }
   }
