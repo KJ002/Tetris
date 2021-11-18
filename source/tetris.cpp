@@ -31,7 +31,8 @@ void Tetris::spawnShape(){
   ** push current into shapes.
    */
 
-  shapes.push_back(current);
+  if (current != NULL)
+    shapes.push_back(current);
 
   TetrisBlock * x = new TetrisBlock(spawnPosition.x, spawnPosition.y, rand());
 
@@ -450,6 +451,9 @@ bool Tetris::shouldGameOver(){
 
 void Tetris::clearBoard(){
   score = 0;
+
+  for (auto shape : shapes)
+    delete shape;
 
   display.clear();
   shapes.clear();

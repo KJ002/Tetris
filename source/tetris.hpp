@@ -12,7 +12,7 @@ private:
   Display display;
 
   std::vector<TetrisBlock*> shapes;
-  TetrisBlock* current;
+  TetrisBlock* current = NULL;
   std::array<bool, 200> globalMap;
   Vec2 spawnPosition = {(float)(GetScreenWidth()/2)-20, (float)0};
 
