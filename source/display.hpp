@@ -17,5 +17,6 @@ public:
   void removeShape(Object*);
   void drawShape() const;
   void closeScreen() const;
+  void clear();
   std::vector<Object*> exposeShapes() const;
 };

@@ -38,6 +38,10 @@ void Display::closeScreen() const{
   CloseWindow();
 }
 
+void Display::clear(){
+  shapes.clear();
+}
+
 std::vector<Object*> Display::exposeShapes() const{
   return shapes;
 }
