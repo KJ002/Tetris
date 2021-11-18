@@ -31,6 +31,8 @@ void Tetris::spawnShape(){
   ** push current into shapes.
    */
 
+  shapes.push_back(current);
+
   TetrisBlock * x = new TetrisBlock(spawnPosition.x, spawnPosition.y, rand());
 
   // Correct current position spawn to top of current
@@ -50,7 +52,6 @@ void Tetris::spawnShape(){
 
   currentBlockBuffer = 0;
   current = x;
-  shapes.push_back(x);
   display.attachShape(x);
 }
 
@@ -455,10 +456,9 @@ void Tetris::clearBoard(){
   display.clear();
   shapes.clear();
 
-  shapes.push_back(current);
+  //shapes.push_back(current);
   display.attachShape(current);
   display.attachShape(&scoreObj);
-
 }
 
 void Tetris::start(){
