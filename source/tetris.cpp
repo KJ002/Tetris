@@ -456,7 +456,6 @@ void Tetris::clearBoard(){
   display.clear();
   shapes.clear();
 
-  //shapes.push_back(current);
   display.attachShape(current);
   display.attachShape(&scoreObj);
 }
