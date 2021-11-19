@@ -21,7 +21,7 @@ Tetris::Tetris(
   this->debug = debug;
   cleanGlobalMap();
 
-  display.attachShape(&scoreObj);
+  display.attachShape(scoreObj);
 }
 
 void Tetris::spawnShape(){
@@ -369,7 +369,7 @@ void Tetris::updateScore(){
   score += 100*fullLines.size();
 
   // Format score into a string and pass to scoreObj.text
-  scoreObj.text = std::to_string(score);
+  scoreObj->text = std::to_string(score);
 
   // Adjust score position due to length change
   updateScorePosition();
@@ -380,10 +380,10 @@ void Tetris::updateScorePosition(){
   ** Correct scoreObj x position to align by the right opposed to the left
    */
 
-  int textSize = MeasureText(scoreObj.text.data(), scoreObj.fontSize);
-  int delta = scoreObjNEPos.x - (scoreObj.x + textSize);
+  int textSize = MeasureText(scoreObj->text.data(), scoreObj->fontSize);
+  int delta = scoreObjNEPos.x - (scoreObj->x + textSize);
 
-  scoreObj.x += delta;
+  scoreObj->x += delta;
 }
 
 bool Tetris::currentWillBeOut(char direction){
@@ -451,15 +451,34 @@ bool Tetris::shouldGameOver(){
 
 void Tetris::clearBoard(){
   score = 0;
+  updateScores();
 
   for (auto shape : shapes)
     delete shape;
 
+  // Empty display and shape vectors
+
   display.clear();
   shapes.clear();
 
+  // Re-attach all shapes
+
   display.attachShape(current);
-  display.attachShape(&scoreObj);
+  display.attachShape(scoreObj);
+
+  for (Text* x : pastScores)
+    display.attachShape(x);
+}
+
+void Tetris::updateScores(){
+  pastScores.push_back(scoreObj);
+  scoreObj = new Text("0", scoreObjNEPos, 10, RAYWHITE);
+
+  int start = 22;
+
+  for (int i = 0; i < (int)pastScores.size(); i++){
+    pastScores[i]->y = start + i * 20;
+  }
 }
 
 void Tetris::start(){
@@ -489,10 +508,10 @@ void Tetris::start(){
       correctPosition();
       if (hasPassedYAxis() || currentWillCollide(Vec2(0, 10))){
         spawnShape();
+        pastScores.push_back(scoreObj);
         continue;
       }
     }
-
 
     deltaMoveDown();
 
