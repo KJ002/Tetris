@@ -263,7 +263,7 @@ void Tetris::updateGlobalMap(){
   }
 }
 
-std::vector<int> Tetris::getFullLines(){
+void Tetris::getFullLines(){
   /*
   ** Gets all full lines of the Tetris board.
   ** The functionality of Tetris blocks
@@ -283,10 +283,10 @@ std::vector<int> Tetris::getFullLines(){
       result.push_back(i);
   }
 
-  return result;
+  result = fullLines;
 }
 
-void Tetris::purgeFullLines(std::vector<int> y){
+void Tetris::purgeFullLines(){
   /*
   ** Deletes all valid indexs on a Tetris block map
   ** provided the points of intersection.
@@ -294,14 +294,14 @@ void Tetris::purgeFullLines(std::vector<int> y){
 
   for (TetrisBlock* x : shapes){
     for (int i = 0; i < 25; i++){
-      if (std::find(y.begin(), y.end(), x->getPosition(i).y) != y.end()){
+      if (std::find(fullLines.begin(), fullLines.end(), x->getPosition(i).y) != fullLines.end()){
         x->meta.map[i] = false;
       }
     }
   }
 }
 
-void Tetris::correctLines(std::vector<int> y){
+void Tetris::correctLines(){
   /*
   ** Corrects all positions of shapes by y += 10.
   ** However this function has to account for the
@@ -322,7 +322,7 @@ void Tetris::correctLines(std::vector<int> y){
   ** All other shapes are left untouched.
    */
 
-  for (int x : y){
+  for (int x : fullLines){
     for (TetrisBlock* shape : shapes){
 
       if (shape == current)
@@ -359,14 +359,14 @@ void Tetris::correctLines(std::vector<int> y){
   }
 }
 
-void Tetris::updateScore(std::vector<int> y){
+void Tetris::updateScore(){
   /*
   ** Update score class attribute based on the
   ** ammount of full lines found.
    */
 
   // Update score based on intersections
-  score += 100*y.size();
+  score += 100*fullLines.size();
 
   // Format score into a string and pass to scoreObj.text
   scoreObj.text = std::to_string(score);
@@ -512,10 +512,10 @@ void Tetris::start(){
       if (IsKeyPressed(KEY_S)) moveDown();
     }
 
-    std::vector<int> fullLines = getFullLines();
-    purgeFullLines(fullLines);
-    correctLines(fullLines);
-    updateScore(fullLines);
+    getFullLines();
+    purgeFullLines();
+    correctLines();
+    updateScore();
 
   }
 

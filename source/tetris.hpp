@@ -14,6 +14,7 @@ private:
   std::vector<TetrisBlock*> shapes;
   TetrisBlock* current = NULL;
   std::array<bool, 200> globalMap;
+  std::vector<int> fullLines;
   Vec2 spawnPosition = {(float)(GetScreenWidth()/2)-20, (float)0};
 
   int score = 0;
@@ -41,11 +42,10 @@ private:
   bool currentWillCollide(Vec2 direction);
   bool currentCanRotate();
   void updateGlobalMap();
-  std::vector<int> getFullLines();
-  void purgeFullLines(std::vector<int> y);
-  void adjustLines(std::vector<int> y);
-  void correctLines(std::vector<int> y);
-  void updateScore(std::vector<int> y);
+  void getFullLines();
+  void purgeFullLines();
+  void correctLines();
+  void updateScore();
   void updateScorePosition();
   bool currentWillBeOut(char direction = 'L');
   bool shouldGameOver();
