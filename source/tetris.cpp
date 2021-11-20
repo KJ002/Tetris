@@ -513,7 +513,6 @@ void Tetris::start(){
       correctPosition();
       if (hasPassedYAxis() || currentWillCollide(Vec2(0, 10))){
         spawnShape();
-        pastScores.push_back(scoreObj);
         continue;
       }
     }
@@ -542,8 +541,6 @@ void Tetris::start(){
     getFullLines();
     purgeFullLines();
     correctLines();
-    updateScore();
-
   }
 
   display.closeScreen();
