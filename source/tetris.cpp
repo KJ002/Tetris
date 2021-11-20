@@ -137,6 +137,11 @@ void Tetris::correctPosition(){
   }
 }
 
+void Tetris::autoplace(){
+  while (!hasPassedYAxis() && !currentWillCollide(Vec2(0, 10)))
+    moveDown();
+}
+
 bool Tetris::hasPassedYAxis(){
   /*
   ** Checks if current has passed the y-axis
@@ -530,6 +535,9 @@ void Tetris::start(){
 
       if (IsKeyPressed(KEY_S)) moveDown();
     }
+
+    if (IsKeyPressed(KEY_SPACE))
+      autoplace();
 
     getFullLines();
     purgeFullLines();

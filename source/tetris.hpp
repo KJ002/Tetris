@@ -35,6 +35,7 @@ private:
   void deltaMoveDown();
   void rotate();
   void correctPosition();
+  void autoplace();
 
   bool hasPassedYAxis();
   void cleanGlobalMap();
