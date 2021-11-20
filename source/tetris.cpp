@@ -479,10 +479,10 @@ void Tetris::updateScores(){
   pastScores.push_back(scoreObj);
   scoreObj = new Text("0", scoreObjNEPos, 10, RAYWHITE);
 
-  int start = 22;
+  int start = 20;
 
   for (int i = 0; i < (int)pastScores.size(); i++){
-    pastScores[i]->y = start + i * 20;
+    pastScores[i]->y = start + (i * 10);
   }
 }
 

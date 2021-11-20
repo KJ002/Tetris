@@ -20,7 +20,7 @@ private:
   int score = 0;
 
   Vec2 scoreObjNEPos = {90, 10};
-  Text* scoreObj = new Text("0", scoreObjNEPos, 11, RAYWHITE);
+  Text* scoreObj = new Text("0", scoreObjNEPos, 10, RAYWHITE);
   std::vector<Text*> pastScores;
 
   double lastTime = GetTime();
