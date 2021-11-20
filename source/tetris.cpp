@@ -9,6 +9,8 @@
 
 #include <iostream>
 
+#define scoreStart 20
+
 Tetris::Tetris(
   int screenWidth,
   int screenHeight,
@@ -476,14 +478,10 @@ void Tetris::clearBoard(){
 }
 
 void Tetris::updateScores(){
+  scoreObj->y = scoreStart + ((int)pastScores.size() * 10);
   pastScores.push_back(scoreObj);
+
   scoreObj = new Text("0", scoreObjNEPos, 10, RAYWHITE);
-
-  int start = 20;
-
-  for (int i = 0; i < (int)pastScores.size(); i++){
-    pastScores[i]->y = start + (i * 10);
-  }
 }
 
 void Tetris::start(){
