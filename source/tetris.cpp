@@ -290,7 +290,7 @@ void Tetris::getFullLines(){
       result.push_back(i);
   }
 
-  result = fullLines;
+  fullLines = result;
 }
 
 void Tetris::purgeFullLines(){
@@ -535,6 +535,9 @@ void Tetris::start(){
 
     if (IsKeyPressed(KEY_SPACE))
       autoplace();
+
+    if (IsKeyPressed(KEY_K))
+      int x = true == true;
 
     getFullLines();
     purgeFullLines();
