@@ -13,6 +13,7 @@ private:
 
   std::vector<TetrisBlock*> shapes;
   TetrisBlock* current = NULL;
+  TetrisBlock* currentFuture = NULL;
   std::array<bool, 200> globalMap;
   std::vector<int> fullLines;
   Vec2 spawnPosition = {(float)(GetScreenWidth()/2)-20, (float)0};
@@ -37,7 +38,7 @@ private:
   void correctPosition();
   void autoplace();
 
-  bool hasPassedYAxis();
+  bool isCollideYAxis(TetrisBlock* block);
   void cleanGlobalMap();
   int posToIndex(int x, int y);
   int posToIndex(Vec2 v);
@@ -53,6 +54,7 @@ private:
   bool shouldGameOver();
   void clearBoard();
   void updateScores();
+  void calcFutureCurrent();
 
 public:
   Tetris(

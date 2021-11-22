@@ -140,11 +140,11 @@ void Tetris::correctPosition(){
 }
 
 void Tetris::autoplace(){
-  while (!hasPassedYAxis() && !currentWillCollide(Vec2(0, 10)))
+  while (!isCollideYAxis(current) && !currentWillCollide(Vec2(0, 10)))
     moveDown();
 }
 
-bool Tetris::hasPassedYAxis(){
+bool Tetris::isCollideYAxis(TetrisBlock* block){
   /*
   ** Checks if current has passed the y-axis
    */
@@ -154,10 +154,10 @@ bool Tetris::hasPassedYAxis(){
 
   while (i && !foundLowestIndex){
     i--;
-    foundLowestIndex = current->meta.map[i];
+    foundLowestIndex = block->meta.map[i];
   }
 
-  return current->getPosition(i).y+10 >= GetScreenHeight();
+  return block->getPosition(i).y+10 >= GetScreenHeight();
 }
 
 void Tetris::cleanGlobalMap(){
@@ -484,6 +484,9 @@ void Tetris::updateScores(){
   scoreObj = new Text("0", scoreObjNEPos, 10, RAYWHITE);
 }
 
+void Tetris::calcFutureCurrent(){
+}
+
 void Tetris::start(){
   /*
   ** Tetris game main loop. All delta time,
@@ -507,15 +510,17 @@ void Tetris::start(){
     deltaTime = GetTime() - lastTime;
     lastTime = GetTime();
 
-    if (hasPassedYAxis() || currentWillCollide(Vec2(0, 10))){
+    if (isCollideYAxis(current) || currentWillCollide(Vec2(0, 10))){
       correctPosition();
-      if (hasPassedYAxis() || currentWillCollide(Vec2(0, 10))){
+      if (isCollideYAxis(current) || currentWillCollide(Vec2(0, 10))){
         spawnShape();
         continue;
       }
     }
 
     deltaMoveDown();
+
+
 
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
       if (IsKeyPressed(KEY_W) && currentCanRotate()) rotate();
