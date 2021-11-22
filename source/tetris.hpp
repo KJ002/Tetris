@@ -42,15 +42,15 @@ private:
   void cleanGlobalMap();
   int posToIndex(int x, int y);
   int posToIndex(Vec2 v);
-  bool currentWillCollide(Vec2 direction);
-  bool currentCanRotate();
+  bool willCollide(TetrisBlock* block, Vec2 direction);
+  bool canRotate(TetrisBlock* block);
   void updateGlobalMap();
   void getFullLines();
   void purgeFullLines();
   void correctLines();
   void updateScore();
   void updateScorePosition();
-  bool currentWillBeOut(char direction = 'L');
+  bool willBeOut(TetrisBlock* block, char direction = 'L');
   bool shouldGameOver();
   void clearBoard();
   void updateScores();
