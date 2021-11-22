@@ -30,13 +30,13 @@ private:
   float currentBlockBuffer = 0;
 
   void spawnShape();
-  void moveDown();
-  void moveLeft();
-  void moveRight();
-  void deltaMoveDown();
-  void rotate();
+  void moveDown(TetrisBlock* block);
+  void moveLeft(TetrisBlock* block);
+  void moveRight(TetrisBlock* block);
+  void deltaMoveDown(TetrisBlock* block);
+  void rotate(TetrisBlock* block);
   void correctPosition();
-  void autoplace();
+  void autoplace(TetrisBlock* block);
 
   bool isCollideYAxis(TetrisBlock* block);
   void cleanGlobalMap();
