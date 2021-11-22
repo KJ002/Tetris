@@ -33,7 +33,7 @@ private:
   void moveDown(TetrisBlock* block);
   void moveLeft(TetrisBlock* block);
   void moveRight(TetrisBlock* block);
-  void deltaMoveDown(TetrisBlock* block);
+  void deltaMoveDown();
   void rotate(TetrisBlock* block);
   void correctPosition();
   void autoplace(TetrisBlock* block);
