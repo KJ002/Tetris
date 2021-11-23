@@ -484,7 +484,9 @@ void Tetris::updateScores(){
   scoreObj = new Text("0", scoreObjNEPos, 10, RAYWHITE);
 }
 
-void Tetris::calcFutureCurrent(){
+void Tetris::updateFutureCurrent(){
+  currentFuture = *current;
+  autoplace(&currentFuture);
 }
 
 void Tetris::start(){
@@ -495,6 +497,9 @@ void Tetris::start(){
    */
 
   spawnShape();
+  updateFutureCurrent();
+
+  display.attachShape(&currentFuture);
 
   while (!WindowShouldClose()){
     BeginDrawing();
@@ -520,7 +525,7 @@ void Tetris::start(){
 
     deltaMoveDown();
 
-
+    updateFutureCurrent();
 
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
       if (IsKeyPressed(KEY_W) && canRotate(current)) rotate(current);

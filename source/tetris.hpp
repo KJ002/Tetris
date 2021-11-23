@@ -13,7 +13,7 @@ private:
 
   std::vector<TetrisBlock*> shapes;
   TetrisBlock* current = NULL;
-  TetrisBlock* currentFuture = NULL;
+  TetrisBlock currentFuture = {0, 0, 0};
   std::array<bool, 200> globalMap;
   std::vector<int> fullLines;
   Vec2 spawnPosition = {(float)(GetScreenWidth()/2)-20, (float)0};
@@ -54,7 +54,7 @@ private:
   bool shouldGameOver();
   void clearBoard();
   void updateScores();
-  void calcFutureCurrent();
+  void updateFutureCurrent();
 
 public:
   Tetris(
