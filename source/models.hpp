@@ -15,6 +15,8 @@ struct TetrisMeta{
 
   Vec2 get() const;
 
+  Rectangle getRec() const;
+
   void setX(const int x);
   void setY(const int y);
 

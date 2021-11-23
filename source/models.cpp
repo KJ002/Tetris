@@ -117,6 +117,10 @@ Vec2 TetrisMeta::get() const{
   return origin;
 }
 
+Rectangle TetrisMeta::getRec() const{
+  return (Rectangle){origin.x, origin.y, 10., 10.};
+}
+
 void TetrisMeta::setX(const int x){
   origin.x = (float)x;
 }

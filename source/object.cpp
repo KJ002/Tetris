@@ -39,14 +39,19 @@ void TetrisBlock::draw() const{
           meta.colour
         );
 
-      else
-        DrawRectangleLines(
-          meta.getX()+(deltaX*10),
-          meta.getY()+(deltaY*10),
-          10,
-          10,
+      else{
+
+        Rectangle block = meta.getRec();
+
+        block.x+=deltaX*10;
+        block.y+=deltaY*10;
+
+        DrawRectangleLinesEx(
+          block,
+          .51,
           meta.colour
         );
+      }
     }
   }
 }
