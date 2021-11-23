@@ -58,28 +58,28 @@ void Tetris::spawnShape(){
   display.attachShape(x);
 }
 
-void Tetris::moveDown(){
+void Tetris::moveDown(TetrisBlock* block){
   /*
-  ** Alias to move current down.
+  ** Alias to move block down.
    */
 
-  current->meta.appendY(10);
+  block->meta.appendY(10);
 }
 
-void Tetris::moveLeft(){
+void Tetris::moveLeft(TetrisBlock* block){
   /*
   ** Alias to move current left.
    */
 
-  current->meta.appendX(-10);
+  block->meta.appendX(-10);
 }
 
-void Tetris::moveRight(){
+void Tetris::moveRight(TetrisBlock* block){
   /*
   ** Alias to move current right.
    */
 
-  current->meta.appendX(10);
+  block->meta.appendX(10);
 }
 
 void Tetris::deltaMoveDown(){
@@ -93,17 +93,17 @@ void Tetris::deltaMoveDown(){
   currentBlockBuffer += 10*((debug) ? .01667 : deltaTime);
 
   if (currentBlockBuffer >= 10){
-    moveDown();
+    moveDown(current);
     currentBlockBuffer-=10;
   }
 }
 
-void Tetris::rotate(){
+void Tetris::rotate(TetrisBlock* block){
   /*
   ** Alias to rotate current
    */
 
-  current->rotateRight();
+  block->rotateRight();
 }
 
 void Tetris::correctPosition(){
@@ -118,14 +118,14 @@ void Tetris::correctPosition(){
   while (time+1 > GetTime()){
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) < 2){
       if (IsKeyPressed(KEY_A) &&
-          !currentWillCollide(Vec2(-10, 0)) &&
-          !currentWillBeOut('L'))
-        moveLeft();
+          !willCollide(current, Vec2(-10, 0)) &&
+          !willBeOut(current, 'L'))
+        moveLeft(current);
 
       if (IsKeyPressed(KEY_D) &&
-          !currentWillCollide(Vec2(10, 0)) &&
-          !currentWillBeOut('R'))
-        moveRight();
+          !willCollide(current, Vec2(10, 0)) &&
+          !willBeOut(current, 'R'))
+        moveRight(current);
     }
 
     if (IsKeyPressed(KEY_S))
@@ -139,9 +139,9 @@ void Tetris::correctPosition(){
   }
 }
 
-void Tetris::autoplace(){
-  while (!isCollideYAxis(current) && !currentWillCollide(Vec2(0, 10)))
-    moveDown();
+void Tetris::autoplace(TetrisBlock* block){
+  while (!isCollideYAxis(block) && !willCollide(block, Vec2(0, 10)))
+    moveDown(block);
 }
 
 bool Tetris::isCollideYAxis(TetrisBlock* block){
@@ -199,36 +199,36 @@ int Tetris::posToIndex(Vec2 v){
   return (v.y*10)+v.x;
 }
 
-bool Tetris::currentWillCollide(Vec2 direction){
+bool Tetris::willCollide(TetrisBlock* block, Vec2 direction){
   /*
   ** Detects if current will intersect another block
   ** given a position offset in the form of a Vec2.
    */
 
-  TetrisBlock future = *current;
+  TetrisBlock future = *block;
 
   future.meta.append(direction);
 
   for (TetrisBlock* other : shapes){
-    if (other != current && future.colliding(other)) return true;
+    if (other != block && future.colliding(other)) return true;
   }
 
   return false;
 
 }
 
-bool Tetris::currentCanRotate(){
+bool Tetris::canRotate(TetrisBlock* block){
   /*
   ** Checks if current can rotate 90 degrees
   ** clockwise without going out of bounds.
    */
 
-  TetrisBlock future = *current;
+  TetrisBlock future = *block;
 
   future.rotateRight();
 
   for (TetrisBlock* other : shapes){
-    if (other != current && future.colliding(other)) return false;
+    if (other != block && future.colliding(other)) return false;
   }
 
   for (int i = 0; i < 25; i++){
@@ -393,7 +393,7 @@ void Tetris::updateScorePosition(){
   scoreObj->x += delta;
 }
 
-bool Tetris::currentWillBeOut(char direction){
+bool Tetris::willBeOut(TetrisBlock* block, char direction){
   /*
   ** Detects if the current shape will
   ** be out of bounds if Left or Right
@@ -405,12 +405,12 @@ bool Tetris::currentWillBeOut(char direction){
     int lowest;
 
     for (int i = 0; i < 25; i++){
-      if (current->meta.map[i] && !lowestSet){
+      if (block->meta.map[i] && !lowestSet){
         lowest = i;
         lowestSet = true;
       }
 
-      if (current->meta.map[i] && i%5 < lowest%5 && lowestSet){
+      if (block->meta.map[i] && i%5 < lowest%5 && lowestSet){
         lowest = i;
       }
     }
@@ -418,7 +418,7 @@ bool Tetris::currentWillBeOut(char direction){
     if (!lowestSet)
       return false;
 
-    if (current->getPosition(lowest).x - 10 < 0)
+    if (block->getPosition(lowest).x - 10 < 0)
       return true;
   }
 
@@ -427,12 +427,12 @@ bool Tetris::currentWillBeOut(char direction){
     int highest;
 
     for (int i = 0; i < 25; i++){
-      if (current->meta.map[i] && !highestSet){
+      if (block->meta.map[i] && !highestSet){
         highest = i;
         highestSet = true;
       }
 
-      if (current->meta.map[i] && i%5 > highest%5 && highestSet){
+      if (block->meta.map[i] && i%5 > highest%5 && highestSet){
         highest = i;
       }
     }
@@ -440,7 +440,7 @@ bool Tetris::currentWillBeOut(char direction){
     if (!highestSet)
       return false;
 
-    if (current->getPosition(highest).x + 10 > 90)
+    if (block->getPosition(highest).x + 10 > 90)
       return true;
   }
 
@@ -510,9 +510,9 @@ void Tetris::start(){
     deltaTime = GetTime() - lastTime;
     lastTime = GetTime();
 
-    if (isCollideYAxis(current) || currentWillCollide(Vec2(0, 10))){
+    if (isCollideYAxis(current) || willCollide(current, Vec2(0, 10))){
       correctPosition();
-      if (isCollideYAxis(current) || currentWillCollide(Vec2(0, 10))){
+      if (isCollideYAxis(current) || willCollide(current, Vec2(0, 10))){
         spawnShape();
         continue;
       }
@@ -523,23 +523,23 @@ void Tetris::start(){
 
 
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
-      if (IsKeyPressed(KEY_W) && currentCanRotate()) rotate();
+      if (IsKeyPressed(KEY_W) && canRotate(current)) rotate(current);
 
       if (IsKeyPressed(KEY_A) &&
-          !currentWillCollide(Vec2(-10, 0)) &&
-          !currentWillBeOut('L'))
-        moveLeft();
+          !willCollide(current, Vec2(-10, 0)) &&
+          !willBeOut(current, 'L'))
+        moveLeft(current);
 
       if (IsKeyPressed(KEY_D) &&
-          !currentWillCollide(Vec2(10, 0)) &&
-          !currentWillBeOut('R'))
-        moveRight();
+          !willCollide(current, Vec2(10, 0)) &&
+          !willBeOut(current, 'R'))
+        moveRight(current);
 
-      if (IsKeyPressed(KEY_S)) moveDown();
+      if (IsKeyPressed(KEY_S)) moveDown(current);
     }
 
     if (IsKeyPressed(KEY_SPACE))
-      autoplace();
+      autoplace(current);
 
     getFullLines();
     purgeFullLines();
