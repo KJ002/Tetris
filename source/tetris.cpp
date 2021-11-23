@@ -486,6 +486,8 @@ void Tetris::updateScores(){
 
 void Tetris::updateFutureCurrent(){
   currentFuture = *current;
+  currentFuture.meta.outlines = true;
+  currentFuture.meta.colour.a = 100;
   autoplace(&currentFuture);
 }
 

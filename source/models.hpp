@@ -8,6 +8,7 @@ struct TetrisMeta{
   Vec2 origin;
   Vec2 rotationalOrigin;
   Color colour;
+  bool outlines = false;
 
   int getX() const;
   int getY() const;

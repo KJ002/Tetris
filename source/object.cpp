@@ -30,14 +30,23 @@ void TetrisBlock::draw() const{
       int deltaX = i%5;
       int deltaY = (int)i/5;
 
-      DrawRectangle(
-        meta.getX()+(deltaX*10),
-        meta.getY()+(deltaY*10),
-        10,
-        10,
-        meta.colour
-      );
+      if (!meta.outlines)
+        DrawRectangle(
+          meta.getX()+(deltaX*10),
+          meta.getY()+(deltaY*10),
+          10,
+          10,
+          meta.colour
+        );
 
+      else
+        DrawRectangleLines(
+          meta.getX()+(deltaX*10),
+          meta.getY()+(deltaY*10),
+          10,
+          10,
+          meta.colour
+        );
     }
   }
 }
