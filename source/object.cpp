@@ -25,6 +25,7 @@ TetrisBlock::TetrisBlock(int x, int y, int shape){
 }
 
 void TetrisBlock::draw() const{
+
   for (int i = 0; i < 25; i++){
     if (meta.map[i]){
       int deltaX = i%5;
@@ -46,9 +47,17 @@ void TetrisBlock::draw() const{
         block.x+=deltaX*10;
         block.y+=deltaY*10;
 
+        block.width *= meta.blockScale;
+        block.height *= meta.blockScale;
+
+        Vec2 d(10-block.width, 10-block.height);
+
+        block.x+=d.x/2;
+        block.y+=d.y/2;
+
         DrawRectangleLinesEx(
           block,
-          .51,
+          1,
           meta.colour
         );
       }
