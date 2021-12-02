@@ -235,7 +235,6 @@ bool Tetris::canRotate(TetrisBlock* block){
     if(future.meta.map[i] &&
        (future.getPosition(i).x < 0 ||
         future.getPosition(i).x >= 100 ||
-        future.getPosition(i).y < 0 ||
         future.getPosition(i).y > 200))
       return false;
   }
