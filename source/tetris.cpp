@@ -551,6 +551,8 @@ void Tetris::start(){
     getFullLines();
     purgeFullLines();
     correctLines();
+    updateScore();
+    fullLines.clear();
   }
 
   display.closeScreen();
