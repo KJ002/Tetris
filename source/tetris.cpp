@@ -115,7 +115,7 @@ void Tetris::correctPosition(){
 
   double time = GetTime();
 
-  while (time+1 > GetTime()){
+  while (time+.4 > GetTime()){
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) < 2){
       if (IsKeyPressed(KEY_A) &&
           !willCollide(current, Vec2(-10, 0)) &&
