@@ -115,7 +115,14 @@ void Tetris::correctPosition(){
 
   double time = GetTime();
 
+  display.removeShape(&currentFuture);
+
   while (time+.4 > GetTime()){
+    BeginDrawing();
+    ClearBackground(BLACK);
+    display.drawShape();
+    EndDrawing();
+
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) < 2){
       if (IsKeyPressed(KEY_A) &&
           !willCollide(current, Vec2(-10, 0)) &&
@@ -130,13 +137,9 @@ void Tetris::correctPosition(){
 
     if (IsKeyPressed(KEY_S))
       break;
-
-    BeginDrawing();
-    ClearBackground(BLACK);
-    display.drawShape();
-    EndDrawing();
-
   }
+
+  display.attachShape(&currentFuture);
 }
 
 void Tetris::autoplace(TetrisBlock* block){
