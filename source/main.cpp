@@ -1,4 +1,5 @@
 #include "tetris.hpp"
+#include "display.hpp"
 
 #define screenWidth 100
 #define screenHeight 200
@@ -7,7 +8,9 @@
 
 
 int main(){
-  Tetris game(screenWidth, screenHeight, screenTitle, screenFPS);
+  Display display(screenWidth, screenHeight, screenTitle, screenFPS);
+
+  Tetris game(screenWidth, screenHeight, screenTitle, screenFPS, &display);
 
   game.start();
 

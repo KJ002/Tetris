@@ -9,7 +9,7 @@ class Tetris{
 private:
   bool debug;
 
-  Display display;
+  Display* display;
 
   std::vector<TetrisBlock*> shapes;
   TetrisBlock* current = NULL;
@@ -60,8 +60,9 @@ public:
   Tetris(
     int screenWidth,
     int screenHeight,
-    char * title,
+    char* title,
     int screenFPS = 60,
+    Display* screenDisplay = nullptr,
     bool debug = false
   );
 

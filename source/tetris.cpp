@@ -14,16 +14,19 @@
 Tetris::Tetris(
   int screenWidth,
   int screenHeight,
-  char * title,
+  char* title,
   int screenFPS,
-  bool debug
-):
-  display(screenWidth, screenHeight, title, screenFPS)
+  Display* screenDisplay,
+  bool debug)
 {
+  if (screenDisplay == nullptr)
+    display = new Display(screenWidth, screenHeight, title, screenFPS);
+
+  display = screenDisplay;
   this->debug = debug;
   cleanGlobalMap();
 
-  display.attachShape(scoreObj);
+  display->attachShape(scoreObj);
 }
 
 void Tetris::spawnShape(){
@@ -55,7 +58,7 @@ void Tetris::spawnShape(){
 
   currentBlockBuffer = 0;
   current = x;
-  display.attachShape(x);
+  display->attachShape(x);
 }
 
 void Tetris::moveDown(TetrisBlock* block){
@@ -115,12 +118,12 @@ void Tetris::correctPosition(){
 
   double time = GetTime();
 
-  display.removeShape(&currentFuture);
+  display->removeShape(&currentFuture);
 
   while (time+.4 > GetTime()){
     BeginDrawing();
     ClearBackground(BLACK);
-    display.drawShape();
+    display->drawShape();
     EndDrawing();
 
     if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) < 2){
@@ -139,7 +142,7 @@ void Tetris::correctPosition(){
       break;
   }
 
-  display.attachShape(&currentFuture);
+  display->attachShape(&currentFuture);
 }
 
 void Tetris::autoplace(TetrisBlock* block){
@@ -467,16 +470,16 @@ void Tetris::clearBoard(){
 
   // Empty display and shape vectors
 
-  display.clear();
+  display->clear();
   shapes.clear();
 
   // Re-attach all shapes
 
-  display.attachShape(current);
-  display.attachShape(scoreObj);
+  display->attachShape(current);
+  display->attachShape(scoreObj);
 
   for (Text* x : pastScores)
-    display.attachShape(x);
+    display->attachShape(x);
 }
 
 void Tetris::updateScores(){
@@ -503,12 +506,12 @@ void Tetris::start(){
   spawnShape();
   updateFutureCurrent();
 
-  display.attachShape(&currentFuture);
+  display->attachShape(&currentFuture);
 
   while (!WindowShouldClose()){
     BeginDrawing();
     ClearBackground(BLACK);
-    display.drawShape();
+    display->drawShape();
     EndDrawing();
 
     updateGlobalMap();
@@ -557,5 +560,5 @@ void Tetris::start(){
     fullLines.clear();
   }
 
-  display.closeScreen();
+  display->closeScreen();
 }
