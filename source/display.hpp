@@ -7,11 +7,10 @@
 
 class Display{
 private:
-  std::vector<Object*> shapes;
   int screenWidth, screenHeight;
 
   std::string profile;
-  std::map<std::string, Object*> profiles;
+  std::map<std::string, std::vector<Object*>> profiles;
 
   Vector2 WtoS(Vector2);
 
@@ -20,8 +19,8 @@ public:
   void switchProfile(std::string profile);
   void attachShape(Object* shape);
   void removeShape(Object* shape);
-  void drawShape() const;
+  void drawShape();
   void closeScreen() const;
   void clear();
-  std::vector<Object*> exposeShapes() const;
+  std::vector<Object*> exposeShapes();
 };
