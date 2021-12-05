@@ -26,7 +26,7 @@ void Display::switchProfile(std::string profile){
 }
 
 void Display::attachShape(Object* shape){
-  shapes.push_back(shape);
+  profiles[profile].push_back(shape);
 }
 
 void Display::removeShape(Object* shape){
