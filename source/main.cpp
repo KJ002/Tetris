@@ -11,10 +11,15 @@
 int main(){
   Display display(screenWidth, screenHeight, screenTitle, screenFPS);
 
-  Tetris game(screenWidth, screenHeight, screenTitle, screenFPS, &display);
+  Tetris game(&display);
 
-  while (!WindowShouldClose())
+  while (!WindowShouldClose()){
+    BeginDrawing();
+    ClearBackground(BLACK);
+    display.drawShape();
+    EndDrawing();
     game.update();
+  }
 
   display.closeScreen();
 

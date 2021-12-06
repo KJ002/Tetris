@@ -503,11 +503,6 @@ void Tetris::update(){
   ** done here.
    */
 
-  BeginDrawing();
-  ClearBackground(BLACK);
-  display->drawShape();
-  EndDrawing();
-
   updateGlobalMap();
 
   if (shouldGameOver())
