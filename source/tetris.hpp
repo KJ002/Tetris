@@ -66,5 +66,5 @@ public:
     bool debug = false
   );
 
-  void start();
+  void update();
 };

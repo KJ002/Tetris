@@ -503,7 +503,7 @@ void Tetris::updateFutureCurrent(){
   autoplace(&currentFuture);
 }
 
-void Tetris::start(){
+void Tetris::update(){
   /*
   ** Tetris game main loop. All delta time,
   ** key presses, logic and rendering is
