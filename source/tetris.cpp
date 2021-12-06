@@ -510,57 +510,53 @@ void Tetris::start(){
   ** done here.
    */
 
-  while (!WindowShouldClose()){
-    BeginDrawing();
-    ClearBackground(BLACK);
-    display->drawShape();
-    EndDrawing();
+  BeginDrawing();
+  ClearBackground(BLACK);
+  display->drawShape();
+  EndDrawing();
 
-    updateGlobalMap();
+  updateGlobalMap();
 
-    if (shouldGameOver())
-      clearBoard();
+  if (shouldGameOver())
+    clearBoard();
 
-    deltaTime = GetTime() - lastTime;
-    lastTime = GetTime();
+  deltaTime = GetTime() - lastTime;
+  lastTime = GetTime();
 
+  if (isCollideYAxis(current) || willCollide(current, Vec2(0, 10))){
+    correctPosition();
     if (isCollideYAxis(current) || willCollide(current, Vec2(0, 10))){
-      correctPosition();
-      if (isCollideYAxis(current) || willCollide(current, Vec2(0, 10))){
-        spawnShape();
-        continue;
-      }
+      spawnShape();
+      return;
     }
-
-    deltaMoveDown();
-
-    updateFutureCurrent();
-
-    if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
-      if (IsKeyPressed(KEY_W) && canRotate(current)) rotate(current);
-
-      if (IsKeyPressed(KEY_A) &&
-          !willCollide(current, Vec2(-10, 0)) &&
-          !willBeOut(current, 'L'))
-        moveLeft(current);
-
-      if (IsKeyPressed(KEY_D) &&
-          !willCollide(current, Vec2(10, 0)) &&
-          !willBeOut(current, 'R'))
-        moveRight(current);
-
-      if (IsKeyPressed(KEY_S)) moveDown(current);
-    }
-
-    if (IsKeyPressed(KEY_SPACE))
-      autoplace(current);
-
-    getFullLines();
-    purgeFullLines();
-    correctLines();
-    updateScore();
-    fullLines.clear();
   }
 
-  display->closeScreen();
+  deltaMoveDown();
+
+  updateFutureCurrent();
+
+  if (IsKeyPressed(KEY_A) + IsKeyPressed(KEY_D) + IsKeyPressed(KEY_S) < 2){
+    if (IsKeyPressed(KEY_W) && canRotate(current)) rotate(current);
+
+    if (IsKeyPressed(KEY_A) &&
+        !willCollide(current, Vec2(-10, 0)) &&
+        !willBeOut(current, 'L'))
+      moveLeft(current);
+
+    if (IsKeyPressed(KEY_D) &&
+        !willCollide(current, Vec2(10, 0)) &&
+        !willBeOut(current, 'R'))
+      moveRight(current);
+
+    if (IsKeyPressed(KEY_S)) moveDown(current);
+  }
+
+  if (IsKeyPressed(KEY_SPACE))
+    autoplace(current);
+
+  getFullLines();
+  purgeFullLines();
+  correctLines();
+  updateScore();
+  fullLines.clear();
 }
