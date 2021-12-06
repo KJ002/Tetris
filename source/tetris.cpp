@@ -12,17 +12,10 @@
 #define scoreStart 20
 
 Tetris::Tetris(
-  int screenWidth,
-  int screenHeight,
-  char* title,
-  int screenFPS,
-  Display* screenDisplay,
+  Display* display,
   bool debug)
 {
-  if (screenDisplay == nullptr)
-    display = new Display(screenWidth, screenHeight, title, screenFPS);
-
-  display = screenDisplay;
+  this->display = display;
   this->debug = debug;
   cleanGlobalMap();
 

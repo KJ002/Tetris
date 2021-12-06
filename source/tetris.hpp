@@ -58,10 +58,6 @@ private:
 
 public:
   Tetris(
-    int screenWidth,
-    int screenHeight,
-    char* title,
-    int screenFPS = 60,
     Display* screenDisplay = nullptr,
     bool debug = false
   );
