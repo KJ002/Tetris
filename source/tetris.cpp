@@ -27,6 +27,13 @@ Tetris::Tetris(
   cleanGlobalMap();
 
   display->attachShape(scoreObj);
+
+  // Initial setup phase
+
+  spawnShape();
+  updateFutureCurrent();
+
+  display->attachShape(&currentFuture);
 }
 
 void Tetris::spawnShape(){
@@ -502,11 +509,6 @@ void Tetris::start(){
   ** key presses, logic and rendering is
   ** done here.
    */
-
-  spawnShape();
-  updateFutureCurrent();
-
-  display->attachShape(&currentFuture);
 
   while (!WindowShouldClose()){
     BeginDrawing();
