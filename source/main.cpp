@@ -13,8 +13,10 @@ int main(){
 
   Tetris game(screenWidth, screenHeight, screenTitle, screenFPS, &display);
 
-  while (WindowShouldClose())
+  while (!WindowShouldClose())
     game.update();
+
+  display.closeScreen();
 
   return 0;
 }
