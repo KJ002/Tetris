@@ -1,5 +1,6 @@
 #include "display.hpp"
 #include "menu.hpp"
+#include "object.hpp"
 
 Menu::Menu(
   Display* display,
@@ -7,4 +8,10 @@ Menu::Menu(
 {
   this->display = display;
   this->debug = debug;
+
+  display->attachShape(&button);
+}
+
+void Menu::update(){
+
 }

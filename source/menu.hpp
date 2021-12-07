@@ -1,4 +1,6 @@
+#pragma once
 #include "display.hpp"
+#include "object.hpp"
 
 class Menu{
 private:
@@ -9,6 +11,7 @@ private:
 
 public:
   bool shouldStartGame();
+  Square button = Square(0, 0, 10, 10);
 
   Menu(
     Display* display = nullptr,

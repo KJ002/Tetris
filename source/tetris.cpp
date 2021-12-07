@@ -17,8 +17,8 @@ Tetris::Tetris(
 {
   this->display = display;
   this->debug = debug;
-  cleanGlobalMap();
 
+  cleanGlobalMap();
   display->attachShape(scoreObj);
 
   // Initial setup phase
