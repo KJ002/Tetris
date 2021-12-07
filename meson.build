@@ -7,6 +7,7 @@ executable('source',
            './source/display.cpp',
            './source/object.cpp',
            './source/models.cpp',
-           './source/tetris.cpp'],
+           './source/tetris.cpp',
+           './source/menu.cpp'],
            install : true,
            link_args : ['-lraylib', '-lGL', '-lm', '-pthread', '-ldl'])
