@@ -1,6 +1,7 @@
 #pragma once
 #include "display.hpp"
 #include "object.hpp"
+#include <raylib.h>
 
 class Menu{
 private:
@@ -11,7 +12,7 @@ private:
 
 public:
   bool shouldStartGame();
-  Square button = Square(0, 0, 10, 10);
+  Square button = Square(GetScreenWidth()/2-5, GetScreenHeight()/2-5, 10, 10);
 
   Menu(
     Display* display = nullptr,
