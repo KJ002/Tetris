@@ -44,11 +44,13 @@ struct Text : public Object{
   void draw() const override;
 };
 
-struct Button : public Object{
-  Text contents;
-
+class Button : public Object{
+private:
   int* x = &contents.x;
   int* y = &contents.y;
+
+public:
+  Text contents;
 
   Color bg_colour = {255, 255, 255, 255};
 
@@ -56,5 +58,5 @@ struct Button : public Object{
   void getY() const;
 
   void draw() const override;
-  bool is_clicked() const;
+  bool isClicked() const;
 };
