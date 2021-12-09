@@ -43,3 +43,18 @@ struct Text : public Object{
   Text(std::string text, Vec2 pos, int fonstSize, Color colour = BLACK);
   void draw() const override;
 };
+
+struct Button : public Object{
+  Text contents;
+
+  int* x = &contents.x;
+  int* y = &contents.y;
+
+  Color bg_colour = {255, 255, 255, 255};
+
+  void getX() const;
+  void getY() const;
+
+  void draw() const override;
+  bool is_clicked() const;
+};
