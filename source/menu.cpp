@@ -10,6 +10,7 @@ Menu::Menu(
   this->debug = debug;
 
   display->attachShape(&button);
+  display->attachShape(&buttonText);
 }
 
 void Menu::update(){
