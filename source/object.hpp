@@ -50,12 +50,26 @@ private:
   int* y = &contents.y;
 
 public:
+  Button(std::string text,
+         Vec2 pos,
+         int fontSize,
+         Color colour,
+         int widthOffset = 0,
+         int heightOffset = 0,
+         Color bg = BLACK);
+
+  int widthOffset = 0;
+  int heightOffset = 0;
+
   Text contents;
 
   Color bg_colour = {255, 255, 255, 255};
 
-  void getX() const;
-  void getY() const;
+  int getX() const {return *x-(widthOffset)/2;};
+  int getY() const {return *y-(heightOffset)/2;};
+
+  int getWidth() const;
+  int getHeight() const {return contents.fontSize+heightOffset;};
 
   void draw() const override;
   bool isClicked() const;
