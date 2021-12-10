@@ -170,3 +170,36 @@ Text::Text(
 void Text::draw() const{
   DrawText(text.data(), x, y, fontSize, colour);
 }
+
+Button::Button(
+  std::string text,
+  Vec2 pos,
+  int fontSize,
+  Color colour,
+  int widthOffset,
+  int heightOffset,
+  Color bg_colour
+):
+  contents(text, pos, fontSize, colour)
+{
+  this->widthOffset = widthOffset;
+  this->heightOffset = heightOffset;
+  this->bg_colour = bg_colour;
+}
+
+int Button::getWidth() const{
+  return MeasureText(contents.text.data(), contents.fontSize) + widthOffset;
+}
+
+void Button::draw() const{
+  contents.draw();
+  DrawRectangle(getX(), getY(), getWidth(), getHeight(), bg_colour);
+}
+
+bool Button::isClicked() const{
+  if (IsMouseButtonPressed(1)){
+    if (GetMouseX() >= getX() && GetMouseX() <= getX()+getWidth())
+      if (GetMouseY() >= getY() && GetMouseY() <= getY()+getHeight())
+        return true;
+  }
+}
