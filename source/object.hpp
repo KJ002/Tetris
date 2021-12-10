@@ -14,8 +14,9 @@ struct Square : public Object{
   int y = 0;
   int width = 0;
   int height = 0;
+  Color colour = BLUE;
 
-  Square(int x, int y, int width, int height);
+  Square(int x, int y, int width, int height, Color colour);
   void draw() const override;
 };
 
@@ -44,7 +45,7 @@ struct Text : public Object{
   void draw() const override;
 };
 
-class Button : public Object{
+class Button{
 private:
   int* x = &contents.x;
   int* y = &contents.y;
@@ -61,7 +62,8 @@ public:
   int widthOffset = 0;
   int heightOffset = 0;
 
-  Text contents;
+  Text contents = Text("", Vec2(0.f, 0.f), 0, RAYWHITE);
+  Square box = Square(0, 0, 0, 0, RAYWHITE);
 
   Color bg_colour = {255, 255, 255, 255};
 
@@ -71,6 +73,5 @@ public:
   int getWidth() const;
   int getHeight() const {return contents.fontSize+heightOffset;};
 
-  void draw() const override;
   bool isClicked() const;
 };

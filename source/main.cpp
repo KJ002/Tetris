@@ -23,8 +23,9 @@ int main(){
     ClearBackground(BLACK);
     display.drawShape();
     EndDrawing();
+
+    display.switchProfile("menu");
     menu.update();
-    game.update();
   }
 
   display.closeScreen();

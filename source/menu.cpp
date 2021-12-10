@@ -9,8 +9,8 @@ Menu::Menu(
   this->display = display;
   this->debug = debug;
 
-  display->attachShape(&button);
-  display->attachShape(&buttonText);
+  display->attachShape(&button.box);
+  display->attachShape(&button.contents);
 }
 
 void Menu::update(){

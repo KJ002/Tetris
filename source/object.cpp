@@ -9,11 +9,12 @@
 
 #define LOG(x) std::cout << x << std::endl
 
-Square::Square(int x, int y, int width, int height){
+Square::Square(int x, int y, int width, int height, Color colour){
   this->x = x;
   this->y = y;
   this->width = width;
   this->height = height;
+  this->colour = colour;
 }
 
 void Square::draw() const{
@@ -179,21 +180,18 @@ Button::Button(
   int widthOffset,
   int heightOffset,
   Color bg_colour
-):
-  contents(text, pos, fontSize, colour)
+)
 {
   this->widthOffset = widthOffset;
   this->heightOffset = heightOffset;
   this->bg_colour = bg_colour;
+
+  this->contents = Text(text, pos, fontSize, colour);
+  this->box = Square(getX(), getY(), getWidth(), getHeight(), bg_colour);
 }
 
 int Button::getWidth() const{
   return MeasureText(contents.text.data(), contents.fontSize) + widthOffset;
-}
-
-void Button::draw() const{
-  contents.draw();
-  DrawRectangle(getX(), getY(), getWidth(), getHeight(), bg_colour);
 }
 
 bool Button::isClicked() const{
