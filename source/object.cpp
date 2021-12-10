@@ -202,4 +202,6 @@ bool Button::isClicked() const{
       if (GetMouseY() >= getY() && GetMouseY() <= getY()+getHeight())
         return true;
   }
+
+  return false;
 }
