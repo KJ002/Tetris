@@ -7,5 +7,5 @@ BINARY		= tetris
 all: compile
 
 compile:
-	mkdir -p ${DEST}
+	@mkdir -p ${DEST}
 	${CXX_COMPILER} ${CXX_SRC} ${CXX_FLAGS} -o ${DEST}/${BINARY}
