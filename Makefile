@@ -1,8 +1,6 @@
 SRC 		= source
 DEST		= build
 BINARY		= tetris
-CXX_SRC 	= display.cpp main.cpp menu.cpp models.cpp object.cpp tetris.cpp
-CXX_OBJ 	= ${CXX_SRC:.cpp=.o}
 CXX_FLAGS1 	= -pthread -std=c++20
 CXX_FLAGS2 	= -lraylib -lGL -lm -ldl
 CXXC		= clang++
