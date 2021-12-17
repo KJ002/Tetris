@@ -1,11 +1,6 @@
 section .text
-    global getStack
-    global getCoords
 
-;; Pops and returns the stack
-getStack:
-    pop rax
-    ret
+global getCoords
 
 ;; RDI - value
 ;; RSI - divisor
@@ -13,12 +8,9 @@ getStack:
 ;; rdx (modulo) is pushed first then
 ;; rax (floor division) is pushed second
 getCoords:
-    mov rdx, 0
-    mov rax, rdi
-    mov rcx, rsi
-    div rcx
-
-    push rdx
-    push rax
-
+    mov eax, edi
+    cdq
+    idiv esi
+    sal rdx, 32
+    or rax, rdx
     ret
