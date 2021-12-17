@@ -9,6 +9,13 @@
 
 #define LOG(x) std::cout << x << std::endl
 
+struct Point{
+  int x;
+  int y;
+};
+
+extern "C" Point getCoords(int value, int divisor);
+
 Square::Square(int x, int y, int width, int height, Color colour){
   this->x = x;
   this->y = y;
@@ -29,13 +36,13 @@ void TetrisBlock::draw() const{
 
   for (int i = 0; i < 25; i++){
     if (meta.map[i]){
-      int deltaX = i%5;
-      int deltaY = (int)i/5;
+
+      Point delta = getCoords(i, 5);
 
       if (!meta.outlines)
         DrawRectangle(
-          meta.getX()+(deltaX*10),
-          meta.getY()+(deltaY*10),
+          meta.getX()+(delta.x*10),
+          meta.getY()+(delta.y*10),
           10,
           10,
           meta.colour
@@ -45,8 +52,8 @@ void TetrisBlock::draw() const{
 
         Rectangle block = meta.getRec();
 
-        block.x+=deltaX*10;
-        block.y+=deltaY*10;
+        block.x+=delta.x*10;
+        block.y+=delta.y*10;
 
         block.width *= meta.blockScale;
         block.height *= meta.blockScale;
