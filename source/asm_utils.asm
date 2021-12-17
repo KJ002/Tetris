@@ -11,6 +11,6 @@ getCoords:
     mov eax, edi
     cdq
     idiv esi
-    sal rdx, 32
+    sal rax, 32
     or rax, rdx
     ret
