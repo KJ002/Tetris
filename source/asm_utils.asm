@@ -4,9 +4,8 @@ global getCoords
 
 ;; RDI - value
 ;; RSI - divisor
-;; Values are pushed onto stack
-;; rdx (modulo) is pushed first then
-;; rax (floor division) is pushed second
+;; rdx (modulo)
+;; rax (floor division)
 getCoords:
     mov eax, edi
     cdq
