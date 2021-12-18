@@ -23,5 +23,5 @@ public:
   void drawShape();
   void closeScreen() const;
   void clear();
-  std::vector<Object*> exposeShapes();
+  std::vector<Object*> exposeShapes() const;
 };

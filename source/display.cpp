@@ -51,6 +51,6 @@ void Display::clear(){
   profileRef->clear();
 }
 
-std::vector<Object*> Display::exposeShapes(){
+std::vector<Object*> Display::exposeShapes() const{
   return *profileRef;
 }
