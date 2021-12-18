@@ -16,10 +16,19 @@ compile:
 	@mkdir ${DEST}
 	${CXXC} -c ${SRC}/*.cpp ${CXX_FLAGS1}
 	${AC} ${SRC}/*.asm ${ASM_FLAGS}
-
 	@mv ${SRC}/*.o ${DEST}
 	@mv *.o ${DEST}
 	${CXXC} ${DEST}/*.o ${CXX_FLAGS2} -o ${DEST}/${BINARY}
 
-run: compile
+write_diff:
+	git diff > ${DEST}/diff.txt
+
+run:
+	touch ${DEST}/diff.txt
+
+	@if [ git diff != cat ${DEST}/diff.txt ]; then\
+		compile;\
+		write_diff;\
+	fi
+
 	@./${DEST}/${BINARY}
