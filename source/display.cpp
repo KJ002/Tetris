@@ -1,8 +1,7 @@
 #include "display.hpp"
 #include "object.hpp"
 #include <raylib.h>
-
-#define shapes this->profiles[this->profile]
+#include <iostream>
 
 Display::Display(
     int screenWidth,
@@ -21,25 +20,26 @@ Display::Display(
 
 void Display::switchProfile(std::string profile){
   if (!profiles.contains(profile))
-    shapes = {};
+    profiles[profile] = {};
 
   this->profile = profile;
+  this->profileRef = &profiles[profile];
 }
 
 void Display::attachShape(Object* shape){
-  shapes.push_back(shape);
+  profileRef->push_back(shape);
 }
 
 void Display::removeShape(Object* shape){
-  for (size_t i = 0; i < shapes.size(); i++){
-    if (shapes[i] == shape){
-      shapes.erase(shapes.begin()+i);
+  for (size_t i = 0; i < profileRef->size(); i++){
+    if (profileRef->at(i) == shape){
+      profileRef->erase(profileRef->begin()+i);
     }
   }
 }
 
 void Display::drawShape(){
-  for (Object* i : shapes)
+  for (Object* i : *profileRef)
     i->draw();
 }
 
@@ -48,9 +48,9 @@ void Display::closeScreen() const{
 }
 
 void Display::clear(){
-  shapes.clear();
+  profileRef->clear();
 }
 
 std::vector<Object*> Display::exposeShapes(){
-  return shapes;
+  return *profileRef;
 }

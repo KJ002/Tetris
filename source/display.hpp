@@ -10,6 +10,7 @@ private:
   int screenWidth, screenHeight;
 
   std::string profile;
+  std::vector<Object*>* profileRef = nullptr;
   std::map<std::string, std::vector<Object*>> profiles;
 
   Vector2 WtoS(Vector2);
