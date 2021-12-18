@@ -1,7 +1,6 @@
 #include "display.hpp"
 #include "object.hpp"
 #include <raylib.h>
-#include <iostream>
 
 Display::Display(
     int screenWidth,
@@ -32,9 +31,8 @@ void Display::attachShape(Object* shape){
 
 void Display::removeShape(Object* shape){
   for (size_t i = 0; i < profileRef->size(); i++){
-    if (profileRef->at(i) == shape){
+    if (profileRef->at(i) == shape)
       profileRef->erase(profileRef->begin()+i);
-    }
   }
 }
 
