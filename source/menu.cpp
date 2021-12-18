@@ -1,6 +1,7 @@
 #include "display.hpp"
 #include "menu.hpp"
 #include "object.hpp"
+#include <iostream>
 
 Menu::Menu(
   Display* display,
@@ -14,5 +15,6 @@ Menu::Menu(
 }
 
 void Menu::update(){
-
+  if (button.isClicked())
+    display->switchProfile("tetris");
 }
