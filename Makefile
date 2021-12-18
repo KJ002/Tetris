@@ -1,7 +1,7 @@
 SRC 		= source
 DEST		= build
 BINARY		= tetris
-CXX_FLAGS1 	= -pthread -std=c++20
+CXX_FLAGS1 	= -pthread -std=c++20 -g
 CXX_FLAGS2 	= -lraylib -lGL -lm -ldl
 CXXC		= clang++
 ASM_SRC		= ./source/*.asm
@@ -20,3 +20,6 @@ compile:
 	@mv ${SRC}/*.o ${DEST}
 	@mv *.o ${DEST}
 	${CXXC} ${DEST}/*.o ${CXX_FLAGS2} -o ${DEST}/${BINARY}
+
+run: compile
+	@./${DEST}/${BINARY}
