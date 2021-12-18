@@ -18,6 +18,7 @@ private:
 public:
   Display(int width, int height, const char* title, int fps, std::string profile = "main");
   void switchProfile(std::string profile);
+  std::string getProfile() {return this->profile;};
   void attachShape(Object* shape);
   void removeShape(Object* shape);
   void drawShape();
