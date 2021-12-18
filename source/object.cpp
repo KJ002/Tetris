@@ -202,7 +202,7 @@ int Button::getWidth() const{
 }
 
 bool Button::isClicked() const{
-  if (IsMouseButtonPressed(1)){
+  if (IsMouseButtonPressed(0)){
     if (GetMouseX() >= getX() && GetMouseX() <= getX()+getWidth())
       if (GetMouseY() >= getY() && GetMouseY() <= getY()+getHeight())
         return true;
