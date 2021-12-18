@@ -18,14 +18,15 @@ int main(){
   display.switchProfile("menu");
   Menu menu(&display);
 
+
+  display.switchProfile("tetris");
   while (!WindowShouldClose()){
     BeginDrawing();
     ClearBackground(BLACK);
     display.drawShape();
     EndDrawing();
 
-    display.switchProfile("menu");
-    menu.update();
+    game.update();
   }
 
   display.closeScreen();
