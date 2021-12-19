@@ -20,15 +20,5 @@ compile:
 	@mv *.o ${DEST}
 	${CXXC} ${DEST}/*.o ${CXX_FLAGS2} -o ${DEST}/${BINARY}
 
-write_diff:
-	git diff > ${DEST}/diff.txt
-
-run:
-	touch ${DEST}/diff.txt
-
-	@if [ git diff != cat ${DEST}/diff.txt ]; then\
-		compile;\
-		write_diff;\
-	fi
-
+run: compile
 	@./${DEST}/${BINARY}
