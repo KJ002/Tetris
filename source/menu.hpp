@@ -13,7 +13,11 @@ private:
 public:
   bool shouldStartGame();
 
-  Button button = Button("Play", Vec2(GetScreenWidth()/2, GetScreenHeight()/2), 10, RAYWHITE, 0, 0);
+  Button button = Button("Play",
+                         Vec2((float)GetScreenWidth()/2,
+                              (float)GetScreenHeight()/2),
+                         Vec2(40.f, 14.f),
+                         10);
 
   Menu(
     Display* display = nullptr,

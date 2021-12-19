@@ -10,11 +10,10 @@ Menu::Menu(
   this->display = display;
   this->debug = debug;
 
-  button.setX(GetScreenWidth()/2-button.getWidth()/2);
-  button.setY(GetScreenHeight()/2-button.getHeight()/2);
-
   display->attachShape(&button.box);
   display->attachShape(&button.contents);
+
+  button.update();
 }
 
 void Menu::update(){
