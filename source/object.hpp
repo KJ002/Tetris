@@ -47,34 +47,24 @@ struct Text : public Object{
 
 class Button{
 private:
-  int* x = &contents.x;
-  int* y = &contents.y;
+  Vec2 pos;
+  Vec2 size;
+
+  void update();
 
 public:
-  Button(std::string text,
-         Vec2 pos,
-         int fontSize,
-         Color colour,
-         int widthOffset = 0,
-         int heightOffset = 0,
-         Color bg = BLACK);
+  Button(
+    std::string text,
+    Vec2 pos,
+    int fontSize,
+    Color foreground = RAYWHITE,
+    Color background = BLACK
+  );
 
-  int widthOffset = 0;
-  int heightOffset = 0;
+  Text contents;
+  Square box;
 
-  Text contents = Text("", Vec2(0.f, 0.f), 0, RAYWHITE);
-  Square box = Square(0, 0, 0, 0, RAYWHITE);
-
-  Color bg_colour = {255, 255, 255, 255};
-
-  int getX() const {return *x-(widthOffset)/2;};
-  int getY() const {return *y-(heightOffset)/2;};
-
-  int getWidth() const;
-  int getHeight() const {return contents.fontSize+heightOffset;};
-
-  void setX(int x);
-  void setY(int y);
+  void setPos(Vec2 newPos);
 
   bool isClicked() const;
 };
