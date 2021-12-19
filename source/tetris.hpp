@@ -24,7 +24,7 @@ private:
   Text* scoreObj = new Text("0", scoreObjNEPos, 10, RAYWHITE);
   std::vector<Text*> pastScores;
 
-  double lastTime = 0;
+  double lastTime = -1;
   double deltaTime;
 
   float currentBlockBuffer = 0;
