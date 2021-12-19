@@ -73,5 +73,8 @@ public:
   int getWidth() const;
   int getHeight() const {return contents.fontSize+heightOffset;};
 
+  void setX(int x);
+  void setY(int y);
+
   bool isClicked() const;
 };

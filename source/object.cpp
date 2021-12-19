@@ -201,6 +201,16 @@ int Button::getWidth() const{
   return MeasureText(contents.text.data(), contents.fontSize) + widthOffset;
 }
 
+void Button::setX(int x){
+  this->contents = Text(contents.text, Vec2(x, getY()), contents.fontSize, contents.colour);
+  this->box = Square(getX(), getY(), getWidth(), getHeight(), bg_colour);
+}
+
+void Button::setY(int y){
+  this->contents = Text(contents.text, Vec2(getX(), y), contents.fontSize, contents.colour);
+  this->box = Square(getX(), getY(), getWidth(), getHeight(), bg_colour);
+}
+
 bool Button::isClicked() const{
   if (IsMouseButtonPressed(0)){
     if (GetMouseX() >= getX() && GetMouseX() <= getX()+getWidth())
