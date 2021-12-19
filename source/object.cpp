@@ -181,40 +181,30 @@ void Text::draw() const{
 
 Button::Button(
   std::string text,
-  Vec2 pos,
+  Vec2 _pos,
+  Vec2 _size,
   int fontSize,
-  Color colour,
-  int widthOffset,
-  int heightOffset,
-  Color bg_colour
-)
-{
-  this->widthOffset = widthOffset;
-  this->heightOffset = heightOffset;
-  this->bg_colour = bg_colour;
+  Color foreground,
+  Color background
+):
+  contents(text, _pos, fontSize, foreground),
+  box(_pos.x, _pos.y, _size.x, _size.y, background),
+  pos(_pos),
+  size(_size)
+{}
 
-  this->contents = Text(text, pos, fontSize, colour);
-  this->box = Square(getX(), getY(), getWidth(), getHeight(), bg_colour);
-}
+void Button::update(){
+  contents.x = pos.x-(float)textWidth()/2;
+  contents.y = pos.y-contents.fontSize;
 
-int Button::getWidth() const{
-  return MeasureText(contents.text.data(), contents.fontSize) + widthOffset;
-}
-
-void Button::setX(int x){
-  this->contents = Text(contents.text, Vec2(x, getY()), contents.fontSize, contents.colour);
-  this->box = Square(getX(), getY(), getWidth(), getHeight(), bg_colour);
-}
-
-void Button::setY(int y){
-  this->contents = Text(contents.text, Vec2(getX(), y), contents.fontSize, contents.colour);
-  this->box = Square(getX(), getY(), getWidth(), getHeight(), bg_colour);
+  box.x = pos.x-size.x/2;
+  box.y = pos.y-size.y/2;
 }
 
 bool Button::isClicked() const{
   if (IsMouseButtonPressed(0)){
-    if (GetMouseX() >= getX() && GetMouseX() <= getX()+getWidth())
-      if (GetMouseY() >= getY() && GetMouseY() <= getY()+getHeight())
+    if (GetMouseX() >= pos.x-size.x/2 && GetMouseX() <= pos.y+size.x/2)
+      if (GetMouseY() >= pos.y-size.y/2 && GetMouseY() <= pos.y+size.y/2)
         return true;
   }
 

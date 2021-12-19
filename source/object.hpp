@@ -50,7 +50,7 @@ private:
   Vec2 pos;
   Vec2 size;
 
-  void update();
+  int textWidth(){return MeasureText(contents.text.data(), contents.fontSize);};
 
 public:
   Button(
@@ -68,4 +68,5 @@ public:
   void setPos(Vec2 newPos);
 
   bool isClicked() const;
+  void update();
 };
