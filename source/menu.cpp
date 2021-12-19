@@ -1,7 +1,7 @@
 #include "display.hpp"
 #include "menu.hpp"
 #include "object.hpp"
-#include <iostream>
+#include <raylib.h>
 
 Menu::Menu(
   Display* display,
@@ -9,6 +9,9 @@ Menu::Menu(
 {
   this->display = display;
   this->debug = debug;
+
+  button.setX(GetScreenWidth()/2-button.getWidth()/2);
+  button.setY(GetScreenHeight()/2-button.getHeight()/2);
 
   display->attachShape(&button.box);
   display->attachShape(&button.contents);
