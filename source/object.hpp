@@ -56,6 +56,7 @@ public:
   Button(
     std::string text,
     Vec2 pos,
+    Vec2 size,
     int fontSize,
     Color foreground = RAYWHITE,
     Color background = BLACK
