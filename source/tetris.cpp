@@ -508,6 +508,9 @@ void Tetris::update(){
   if (shouldGameOver())
     clearBoard();
 
+  if (lastTime == 0)
+    lastTime = GetTime();
+
   deltaTime = GetTime() - lastTime;
   lastTime = GetTime();
 
