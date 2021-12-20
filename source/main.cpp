@@ -10,7 +10,10 @@
 
 
 int main(){
+
   Display display(screenWidth, screenHeight, screenTitle, screenFPS);
+
+  SetExitKey(KEY_NULL);
 
   display.switchProfile("tetris");
   Tetris game(&display);
