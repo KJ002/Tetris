@@ -195,7 +195,7 @@ Button::Button(
 
 void Button::update(){
   contents.x = pos.x-(float)textWidth()/2;
-  contents.y = pos.y-contents.fontSize;
+  contents.y = pos.y-(float)contents.fontSize/2;
 
   box.x = pos.x-size.x/2;
   box.y = pos.y-size.y/2;
