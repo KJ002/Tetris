@@ -191,7 +191,9 @@ Button::Button(
   box(_pos.x, _pos.y, _size.x, _size.y, background),
   pos(_pos),
   size(_size)
-{}
+{
+  update();
+}
 
 void Button::update(){
   contents.x = pos.x-(float)textWidth()/2;

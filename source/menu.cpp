@@ -12,8 +12,6 @@ Menu::Menu(
 
   display->attachShape(&button.box);
   display->attachShape(&button.contents);
-
-  button.update();
 }
 
 void Menu::update(){
