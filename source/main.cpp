@@ -27,9 +27,13 @@ int main(){
     display.drawShape();
     EndDrawing();
 
+    if (IsKeyPressed(KEY_ESCAPE))
+      display.switchProfile("menu");
+
     if (display.getProfile() == "menu")
       menu.update();
-    else if (display.getProfile() == "tetris")
+
+    if (display.getProfile() == "tetris")
       game.update();
   }
 

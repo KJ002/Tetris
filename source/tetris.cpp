@@ -545,9 +545,6 @@ void Tetris::update(){
   if (IsKeyPressed(KEY_SPACE))
     autoplace(current);
 
-  if (IsKeyPressed(KEY_ESCAPE))
-    display->switchProfile("menu");
-
   getFullLines();
   purgeFullLines();
   correctLines();
