@@ -8,7 +8,6 @@
 class Display{
 private:
   int screenWidth, screenHeight;
-
   std::string profile;
   std::vector<Object*>* profileRef = nullptr;
   std::map<std::string, std::vector<Object*>> profiles;
@@ -24,5 +23,5 @@ public:
   void drawShape();
   void closeScreen() const;
   void clear();
-  std::vector<Object*> exposeShapes() const;
+  std::vector<Object*> exposeShapes(std::string profile) const;
 };
