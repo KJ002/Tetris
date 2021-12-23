@@ -44,8 +44,16 @@ void Display::removeShape(Object* shape){
 }
 
 void Display::drawShape(){
-  for (Object* i : *profileRef)
-    i->draw();
+  std::vector<Object> workingObjects;
+
+  for (Object* i : *dynamicProfileRef)
+    workingObjects.push_back(*i);
+
+  for (int i = 0; i < staticProfileRef->size(); i++)
+    workingObjects.push_back(staticProfileRef->at(i));
+
+  for (int i = 0; i < workingObjects.size(); i++)
+    workingObjects.at(i).draw();
 }
 
 void Display::closeScreen() const{
