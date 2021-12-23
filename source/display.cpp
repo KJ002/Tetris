@@ -31,7 +31,7 @@ void Display::switchProfile(std::string profile){
 }
 
 void Display::attachShape(Object* shape){
-  profileRef->push_back(shape);
+  dynamicProfileRef->push_back(shape);
 }
 
 void Display::removeShape(Object* shape){
