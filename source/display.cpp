@@ -64,10 +64,18 @@ void Display::closeScreen() const{
   CloseWindow();
 }
 
-void Display::clear(){
-  profileRef->clear();
+void Display::clearDynamic(){
+  dynamicProfileRef->clear();
 }
 
-std::vector<Object*> Display::exposeShapes(std::string profile) const{
-  return profiles.at(profile);
+void Display::clearStatic(){
+  staticProfileRef->clear();
+}
+
+std::vector<Object*> Display::exposeDynamicShapes(std::string profile) const{
+  return dynamicProfiles.at(profile);
+}
+
+std::vector<Object> Display::exposeStaticShapes(std::string profile) const{
+  return staticProfiles.at(profile);
 }
