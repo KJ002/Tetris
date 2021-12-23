@@ -35,9 +35,11 @@ void Display::attachShape(Object* shape){
 }
 
 void Display::removeShape(Object* shape){
-  for (size_t i = 0; i < profileRef->size(); i++){
-    if (profileRef->at(i) == shape)
-      profileRef->erase(profileRef->begin()+i);
+  for (size_t i = 0; i < dynamicProfileRef->size(); i++){
+    if (dynamicProfileRef->at(i) == shape){
+      dynamicProfileRef->erase(dynamicProfileRef->begin()+i);
+      return;
+    }
   }
 }
 
