@@ -18,11 +18,16 @@ Display::Display(
 }
 
 void Display::switchProfile(std::string profile){
-  if (!profiles.contains(profile))
-    profiles[profile] = {};
+  if (!dynamicProfiles.contains(profile))
+    dynamicProfiles[profile] = {};
+
+  if (!staticProfiles.contains(profile))
+    staticProfiles[profile] = {};
 
   this->profile = profile;
-  this->profileRef = &profiles[profile];
+
+  this->dynamicProfileRef = &dynamicProfiles[profile];
+  this->staticProfileRef = &staticProfiles[profile];
 }
 
 void Display::attachShape(Object* shape){
@@ -49,6 +54,6 @@ void Display::clear(){
   profileRef->clear();
 }
 
-std::vector<Object*> Display::exposeShapes() const{
-  return *profileRef;
+std::vector<Object*> Display::exposeShapes(std::string profile) const{
+  return profiles.at(profile);
 }
