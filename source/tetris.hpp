@@ -62,5 +62,6 @@ public:
     bool debug = false
   );
 
+  std::vector<TetrisBlock*>* exposeTetrisBlocks();
   void update();
 };

@@ -496,6 +496,10 @@ void Tetris::updateFutureCurrent(){
   autoplace(&currentFuture);
 }
 
+std::vector<TetrisBlock*>* Tetris::exposeTetrisBlocks(){
+  return &this->shapes;
+}
+
 void Tetris::update(){
   /*
   ** Tetris game main loop. All delta time,
