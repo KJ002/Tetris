@@ -1,13 +1,16 @@
 #include "display.hpp"
 #include "menu.hpp"
+#include "tetris.hpp"
 #include "object.hpp"
 #include <raylib.h>
 
 Menu::Menu(
   Display* display,
+  Tetris* game,
   bool debug)
 {
   this->display = display;
+  this->game = game;
   this->debug = debug;
 
   display->attachShape(&button.box);
@@ -15,16 +18,22 @@ Menu::Menu(
 }
 
 void Menu::update(){
-  if (button.isClicked())
+  if (button.isClicked()){
     display->switchProfile("tetris");
+    return;
+  }
 
+  for (TetrisBlock* block : tetrisBlocks){
+    display->removeShape(block);
+    delete block;
+  }
 
-  for (size_t tetrisIndex = 0; tetrisIndex < display->exposeShapes("tetris").size(); tetrisIndex++){
-    for (size_t menuIndex = 0; menuIndex < display->exposeShapes("menu").size(); menuIndex++){
-      if (display->exposeShapes("tetris")[tetrisIndex] == display->exposeShapes("menu")[menuIndex])
-        break;
-      if (menuIndex == display->exposeShapes("menu").size()-1)
-        display->attachShape(display->exposeShapes("tetris")[tetrisIndex]);
-    }
+  tetrisBlocks.clear();
+
+  for (TetrisBlock* block : *(game->exposeTetrisBlocks())){
+    TetrisBlock* copy = new TetrisBlock(*block);
+    copy->meta.colour.a = 50;
+    tetrisBlocks.push_back(copy);
+    display->attachShape(copy);
   }
 }
