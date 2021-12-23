@@ -43,6 +43,10 @@ void Display::removeShape(Object* shape){
   }
 }
 
+void Display::attachShape(Object shape){
+  staticProfileRef->push_back(shape);
+}
+
 void Display::drawShape(){
   std::vector<Object> workingObjects;
 
