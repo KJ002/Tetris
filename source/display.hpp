@@ -27,7 +27,6 @@ public:
   void removeShape(Object* shape);
 
   void attachShape(Object shape);
-  void removeShape(Object shape);
 
   void clearDynamic();
   void clearStatic();
