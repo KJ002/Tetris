@@ -32,6 +32,8 @@ public:
   void clearStatic();
 
   void drawShape();
-  void closeScreen() const;
-  std::vector<Object*> exposeShapes(std::string profile) const;
+    void closeScreen() const;
+
+  std::vector<Object*> exposeDynamicShapes(std::string profile) const;
+  std::vector<Object> exposeStaticShapes(std::string profile) const;
 };
