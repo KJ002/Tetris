@@ -18,64 +18,40 @@ Display::Display(
 }
 
 void Display::switchProfile(std::string profile){
-  if (!dynamicProfiles.contains(profile))
-    dynamicProfiles[profile] = {};
-
-  if (!staticProfiles.contains(profile))
-    staticProfiles[profile] = {};
+  if (!profiles.contains(profile))
+    profiles[profile] = {};
 
   this->profile = profile;
 
-  this->dynamicProfileRef = &dynamicProfiles[profile];
-  this->staticProfileRef = &staticProfiles[profile];
+  this->profileRef = &profiles[profile];
 }
 
 void Display::attachShape(Object* shape){
-  dynamicProfileRef->push_back(shape);
+  profileRef->push_back(shape);
 }
 
 void Display::removeShape(Object* shape){
-  for (size_t i = 0; i < dynamicProfileRef->size(); i++){
-    if (dynamicProfileRef->at(i) == shape){
-      dynamicProfileRef->erase(dynamicProfileRef->begin()+i);
+  for (size_t i = 0; i < profileRef->size(); i++){
+    if (profileRef->at(i) == shape){
+      profileRef->erase(profileRef->begin()+i);
       return;
     }
   }
 }
 
-void Display::attachShape(Object shape){
-  staticProfileRef->push_back(shape);
-}
-
 void Display::drawShape(){
-  std::vector<Object> workingObjects;
-
-  for (Object* i : *dynamicProfileRef)
-    workingObjects.push_back(*i);
-
-  for (int i = 0; i < staticProfileRef->size(); i++)
-    workingObjects.push_back(staticProfileRef->at(i));
-
-  for (int i = 0; i < workingObjects.size(); i++)
-    workingObjects.at(i).draw();
+  for (Object* i : *profileRef)
+    i->draw();
 }
 
 void Display::closeScreen() const{
   CloseWindow();
 }
 
-void Display::clearDynamic(){
-  dynamicProfileRef->clear();
+void Display::clear(){
+  profileRef->clear();
 }
 
-void Display::clearStatic(){
-  staticProfileRef->clear();
-}
-
-std::vector<Object*> Display::exposeDynamicShapes(std::string profile) const{
-  return dynamicProfiles.at(profile);
-}
-
-std::vector<Object> Display::exposeStaticShapes(std::string profile) const{
-  return staticProfiles.at(profile);
+std::vector<Object*> Display::exposeShapes(std::string profile) const{
+  return profiles.at(profile);
 }

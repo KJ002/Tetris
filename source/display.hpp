@@ -10,13 +10,9 @@ private:
   int screenWidth, screenHeight;
   std::string profile;
 
-  std::vector<Object*>* dynamicProfileRef = nullptr;
-  std::vector<Object>* staticProfileRef = nullptr;
+  std::vector<Object*>* profileRef = nullptr;
 
-  std::map<std::string, std::vector<Object*>> dynamicProfiles;
-  std::map<std::string, std::vector<Object>> staticProfiles;
-
-  Vector2 WtoS(Vector2);
+  std::map<std::string, std::vector<Object*>> profiles;
 
 public:
   Display(int width, int height, const char* title, int fps, std::string profile = "main");
@@ -26,14 +22,10 @@ public:
   void attachShape(Object* shape);
   void removeShape(Object* shape);
 
-  void attachShape(Object shape);
-
-  void clearDynamic();
-  void clearStatic();
+  void clear();
 
   void drawShape();
-    void closeScreen() const;
+  void closeScreen() const;
 
-  std::vector<Object*> exposeDynamicShapes(std::string profile) const;
-  std::vector<Object> exposeStaticShapes(std::string profile) const;
+  std::vector<Object*> exposeShapes(std::string profile) const;
 };
