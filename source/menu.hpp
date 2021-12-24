@@ -8,6 +8,10 @@ class Menu{
 private:
   Display* display;
   Tetris* game;
+
+  Text* scoreObj = new Text("0", Vec2((float)GetScreenWidth()/2, 10), 40, RAYWHITE);
+  int score = 0;
+
   bool debug;
 
   std::vector<TetrisBlock*> tetrisBlocks;
