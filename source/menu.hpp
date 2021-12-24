@@ -1,14 +1,16 @@
 #pragma once
 #include "display.hpp"
 #include "object.hpp"
+#include "tetris.hpp"
 #include <raylib.h>
 
 class Menu{
 private:
   Display* display;
+  Tetris* game;
   bool debug;
 
-  bool startGame = false;
+  std::vector<TetrisBlock*> tetrisBlocks;
 
 public:
   bool shouldStartGame();
@@ -21,6 +23,7 @@ public:
 
   Menu(
     Display* display = nullptr,
+    Tetris* game = nullptr,
     bool debug = false
   );
 
