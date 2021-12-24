@@ -47,4 +47,5 @@ void Menu::update(){
 
   score = game->getScore();
   scoreObj->text = std::to_string(score);
+  scoreObj->x = (GetScreenWidth()/2)-MeasureText(std::to_string(score).data(), scoreObj->fontSize)/2;
 }
