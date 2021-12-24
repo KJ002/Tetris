@@ -3,6 +3,7 @@
 #include "tetris.hpp"
 #include "object.hpp"
 #include <raylib.h>
+#include <string>
 
 Menu::Menu(
   Display* display,
@@ -15,13 +16,18 @@ Menu::Menu(
 
   display->attachShape(&button.box);
   display->attachShape(&button.contents);
+  display->attachShape(scoreObj);
 }
 
 void Menu::update(){
+  // Switch display profile to tetris
+
   if (button.isClicked()){
     display->switchProfile("tetris");
     return;
   }
+
+  // Update faded tetris blocks
 
   for (TetrisBlock* block : tetrisBlocks){
     display->removeShape(block);
@@ -36,4 +42,9 @@ void Menu::update(){
     tetrisBlocks.push_back(copy);
     display->attachShape(copy);
   }
+
+  // Update score
+
+  score = game->getScore();
+  scoreObj->text = std::to_string(score);
 }
