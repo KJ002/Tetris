@@ -4,8 +4,14 @@ global getCoords
 
 ;; RDI - value
 ;; RSI - divisor
-;; rdx (modulo)
-;; rax (floor division)
+;; RDX (modulo)
+;; RAX (floor division)
+;;
+;; 32bit values for modulo and division are calculated
+;; rax register (division) is shifted by 32bits to the left
+;; and then is or'ed into the rdx register which holds the
+;; modulo
+;;
 getCoords:
     mov eax, edi
     cdq
