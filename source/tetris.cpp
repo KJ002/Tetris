@@ -496,9 +496,13 @@ void Tetris::updateFutureCurrent(){
   autoplace(&currentFuture);
 }
 
-std::vector<TetrisBlock*>* Tetris::exposeTetrisBlocks(){
+const std::vector<TetrisBlock*>* Tetris::exposeTetrisBlocks() const{
   return &this->shapes;
 }
+
+const int Tetris::getScore() const{
+  return this->score;
+};
 
 void Tetris::update(){
   /*
