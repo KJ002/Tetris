@@ -19,7 +19,7 @@ int main(){
   Tetris game(&display);
 
   display.switchProfile("menu");
-  Menu menu(&display);
+  Menu menu(&display, &game);
 
   while (!WindowShouldClose()){
     BeginDrawing();
